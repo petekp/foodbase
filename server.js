@@ -1,7 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
-var bodyParser = require('body-parser');
 var app = express();
 
 var webpack = require('webpack');
@@ -11,8 +10,6 @@ var compiler = webpack(config);
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath
