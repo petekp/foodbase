@@ -1,0 +1,25 @@
+{
+  "name": "foodbase",
+  "version": "1.0.0",
+  "description": "See what foods are in season",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/petekp/foodbase.git"
+  },
+  "author": "Pete Petrash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petekp/foodbase/issues"
+  },
+  "homepage": "https://github.com/petekp/foodbase#readme"
+}
