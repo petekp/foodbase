@@ -1,2 +1,2 @@
-export const NICE = 'green';
-export const SUPER_NICE = 'orange';
+export const NICE = 'aqua';
+export const SUPER_NICE = 'purple';
