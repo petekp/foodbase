@@ -10,7 +10,6 @@ class App extends Component {
         this.loadFoodsFromServer();
         setInterval(this.loadFoodsFromServer.bind(this), this.props.pollInterval)
     }
-
     loadFoodsFromServer() {
         $.ajax({
             url: this.props.url,
@@ -22,24 +21,6 @@ class App extends Component {
             error: (xhr, status, err) => {
                 console.error(this.props.url, status, err.toString());
             }
-        });
-    }
-    handleFoodSubmit(food) {
-        let foods = this.state.data;
-        foods.push(food);
-        this.setState({data: foods}, function() {
-            $.ajax({
-                url: this.props.url,
-                dataType: 'json',
-                type: 'POST',
-                data: food,
-                success: (data) => {
-                    this.setState({data: data});
-                },
-                error: (xhr, status, err) => {
-                    console.error(this.props.url, status, err.toString());
-                }
-            });
         });
     }
     render() {
@@ -60,10 +41,8 @@ class Food extends Component {
     componentDidMount () {
         this.setState({isSelected: false})
     }
-
     handleClick (e) {
-
-        this.setState({isSelected: !this.state.isSelected})
+        this.setState({isSelected:!this.state.isSelected})
 
         let deltaX = 0;
         let deltaY = 0;
@@ -109,7 +88,7 @@ class FoodList extends Component {
     }
 
     sortByKey (array, key) {
-        return array.sort(function(a, b) {
+        return array.sort((a, b) => {
             var x = a[key]; var y = b[key];
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
