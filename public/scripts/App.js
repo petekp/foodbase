@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-var css = require('../css/base.css');
+var css = require('../css/app.css');
 export const NICE       = 'aqua'
 export const SUPER_NICE = 'purple'
 
