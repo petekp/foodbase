@@ -1,11 +1,10 @@
-var fs = require('fs');
-var path = require('path');
-var express = require('express');
-var app = express();
-
-var webpack = require('webpack');
-var config = require('./webpack.config');
-var compiler = webpack(config);
+var fs           = require('fs');
+var path         = require('path');
+var express      = require('express');
+var app          = express();
+var webpack      = require('webpack');
+var config       = require('./webpack.config');
+var compiler     = webpack(config);
 
 app.set('port', (process.env.PORT || 3000));
 

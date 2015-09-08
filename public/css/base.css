@@ -19,25 +19,27 @@ body {
     /*opacity: 0;*/
 }
 .Food{
+    z-index: 1;
     position: relative;
     width: 25%;
     float: left;
-    padding: 17% 0 0 0;
+    padding: 25vh 0 0 0;
     text-align: center;
     transition: all 0.1s cubic-bezier(0.705, 0, 0.290, 1.1);
     cursor: pointer;
     -webkit-user-select: none;
+
+    &:hover{
+        z-index: 999;
+        opacity: 0.8;
+    }
 }
-.Food:hover{
-    /*transform: scale(2);*/
-    /*z-index: 999;*/
-    opacity: 0.8;
-}
+
 .foodName{
     position: absolute;
     left: 1rem;
     bottom: 1rem;
-    font-size: 1.4rem;
+    font-size: responsive;
     color: #fff;
     transition: all 0.4s ease-in-out;
     -webkit-user-select: none;
