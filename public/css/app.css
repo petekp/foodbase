@@ -1,22 +1,16 @@
 body {
-  background: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin: 0;
+    background: #fff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0;
 }
 .FoodCart{
--webkit-user-select: none;
+    -webkit-user-select: none;
 }
 .FoodList{
     transition: all 0.6s cubic-bezier(0.705, 0, 0.290, 1);
     -webkit-user-select: none;
-}
-.FoodList:hover{
-    /*transform: scale(3.4);*/
-}
-.FoodList:hover .foodName{
-    /*opacity: 0;*/
 }
 .Food{
     z-index: 1;
@@ -34,7 +28,6 @@ body {
         opacity: 0.8;
     }
 }
-
 .foodName{
     position: absolute;
     left: 1rem;

@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-var css = require('../css/app.css');
-export const NICE       = 'aqua'
-export const SUPER_NICE = 'purple'
+var css = require('../css/app.css')
 
 class App extends Component {
     constructor(props) {
         super(props)
         this.state = {data: []}
-
     }
     componentDidMount() {
         this.loadFoodsFromServer()
@@ -35,18 +32,37 @@ class App extends Component {
     }
 }
 
+class FoodList extends Component {
+    sortByKey (array, key) {
+        return array.sort((a, b) => {
+            let x = a[key],
+                y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0))
+        })
+    }
+    render () {
+        let sortedArray = this.sortByKey(this.props.data, "name")
+        let foodNodes = sortedArray.map((food, index) => {
+            return (
+                <Food key={index} name={food.name} type={food.type} hue={food.hue}>
+                    {food.text}
+                </Food>
+            )
+        })
+        return (
+            <div className="FoodList">
+                {foodNodes}
+            </div>
+        )
+    }
+}
 
 class Food extends Component {
-    constructor(props) {
-        super(props)
-
-    }
     componentDidMount () {
         this.setState({isSelected: false})
     }
     handleClick (e) {
         this.setState({isSelected:!this.state.isSelected})
-
         let deltaX         = 0,
             deltaY         = 0,
             scale          = 4,
@@ -74,34 +90,6 @@ class Food extends Component {
                 <span className="foodName">
                     {this.props.name}
                 </span>
-            </div>
-        )
-    }
-}
-
-class FoodList extends Component {
-    constructor(props) {
-        super(props)
-    }
-    sortByKey (array, key) {
-        return array.sort((a, b) => {
-            let x = a[key],
-                y = b[key];
-            return ((x < y) ? -1 : ((x > y) ? 1 : 0))
-        })
-    }
-    render () {
-        let sortedArray = this.sortByKey(this.props.data, "name")
-        let foodNodes = sortedArray.map((food, index) => {
-            return (
-                <Food key={index} name={food.name} type={food.type} hue={food.hue}>
-                    {food.text}
-                </Food>
-            )
-        })
-        return (
-            <div className="FoodList">
-                {foodNodes}
             </div>
         )
     }
