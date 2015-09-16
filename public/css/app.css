@@ -1,9 +1,9 @@
 body {
     background: #fff;
-    font-family: system, -apple-system, "Georgia","Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Proxima Nova", "Georgia","Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.1rem;
     line-height: 1.7;
-    font-weight: 100;
+    font-weight: 400;
     margin: 0;
     text-rendering: optimizeLegibility;
 }
@@ -11,7 +11,7 @@ body {
     -webkit-user-select: none;
 }
 .FoodList{
-    transition: all 0.6s cubic-bezier(0.705, 0, 0.290, 1);
+    transition: all 0.6s cubic-bezier(0.45, 0, 0.290, 1);
     -webkit-user-select: none;
 }
 .Food{
@@ -21,7 +21,7 @@ body {
     float: left;
     padding: 25vh 0 0 0;
     text-align: center;
-    transition: all 0.1s cubic-bezier(0.705, 0, 0.290, 1);
+    transition: all 0.1s cubic-bezier(0.45, 0, 0.290, 1);
     cursor: pointer;
     overflow: hidden;
     -webkit-user-select: none;
@@ -32,16 +32,16 @@ body {
     &:hover{
         z-index: 999;
         opacity: 1;
-        transition: all 0.3s cubic-bezier(0.705, 0, 0.290, 1);
+        transition: all 0.3s cubic-bezier(0.45, 0, 0.290, 1);
         transform: scale(1.03);
-        box-shadow: 1rem 0 2rem 0 rgba(0,0,0,0.27);
+        box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.27);
 
         .foodName{
 
         }
         .foodPhoto{
             opacity: 0.65;
-            transition: all 0.3s cubic-bezier(0.705, 0, 0.290, 1);
+            transition: all 0.3s cubic-bezier(0.45, 0, 0.290, 1);
             transform: scale(1.03);
         }
     }
@@ -63,8 +63,8 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    opacity: 0.4;
-    transition: all 0.1s cubic-bezier(0.705, 0, 0.290, 1.1);
+    opacity: 0.3;
+    transition: all 0.1s cubic-bezier(0.45, 0, 0.290, 1.1);
     background-size: cover;
     transform: scale(1.06);
     overflow: hidden;
