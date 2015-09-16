@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-var css = require('../css/app.css')
+import css from '../css/app.css'
 
 class App extends Component {
     constructor(props) {
@@ -64,28 +64,31 @@ class Food extends Component {
     componentDidMount () {
         this.setState({isSelected: false})
     }
-    handleClick (e) {
-        this.setState({isSelected:!this.state.isSelected})
-        let deltaX         = 0,
-            deltaY         = 0,
-            scale          = 4,
-            windowCenterX  = $(window).outerWidth() / 2,
-            windowCenterY  = $(window).outerHeight() / 2,
-            $element       = $(React.findDOMNode(this)),
-            $parent        = $element.parent(),
-            parentOffset   = $parent.offset(),
-            elOffset       = $element.offset(),
-            elementCenterX = elOffset.left + $element.outerWidth()/2,
-            elementCenterY = elOffset.top + $element.outerHeight()/2
+    zoom () {
+        let deltaX          = 0,
+            deltaY          = 0,
+            scale           = 4,
+            $windowCenterX  = $(window).outerWidth() / 2,
+            $windowCenterY  = $(window).outerHeight() / 2,
+            $el             = $(React.findDOMNode(this)),
+            $elOffset       = $el.offset(),
+            $elCenterX      = $elOffset.left + $el.outerWidth()/2,
+            $elCenterY      = $elOffset.top + $el.outerHeight()/2,
+            $elParent       = $el.parent(),
+            $elParentOffset = $elParent.offset()
 
-        deltaX = parentOffset.left + ((windowCenterX * scale) - (elementCenterX * scale))
-        deltaY = parentOffset.top + (windowCenterY - (elementCenterY * scale))
+        deltaX = $elParentOffset.left + (($windowCenterX * scale) - ($elCenterX * scale))
+        deltaY = $elParentOffset.top + ($windowCenterY - ($elCenterY * scale))
 
         if(this.state.isSelected){
-            $parent.css('transform', `translate(0px,0px) scale(1)`)
+            $elParent.css('transform', `translate(0px,0px) scale(1)`)
         } else{
-            $parent.css(`transform`, `translate(${deltaX}px,${deltaY}px) scale(${scale})`)
+            $elParent.css(`transform`, `translate(${deltaX}px,${deltaY}px) scale(${scale})`)
         }
+    }
+    handleClick (e) {
+        this.setState({isSelected:!this.state.isSelected})
+        this.zoom()
     }
     render () {
         var bgImageURL = `url(images/foods/` + this.props.name.toLowerCase() + `@2x.jpg)`;

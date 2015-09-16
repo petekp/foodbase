@@ -1,8 +1,9 @@
 body {
     background: #fff;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: system, -apple-system, "Georgia","Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.1rem;
     line-height: 1.7;
+    font-weight: 100;
     margin: 0;
     text-rendering: optimizeLegibility;
 }
@@ -20,22 +21,28 @@ body {
     float: left;
     padding: 25vh 0 0 0;
     text-align: center;
-    transition: all 0.2s cubic-bezier(0.705, 0, 0.290, 1.1);
+    transition: all 0.1s cubic-bezier(0.705, 0, 0.290, 1);
     cursor: pointer;
+    overflow: hidden;
     -webkit-user-select: none;
 
+    &:focus{
+        filter: blur(10px);
+    }
     &:hover{
         z-index: 999;
         opacity: 1;
-        transition: all 0.5s cubic-bezier(0.705, 0, 0.190, 1.1);
+        transition: all 0.3s cubic-bezier(0.705, 0, 0.290, 1);
         transform: scale(1.03);
-        box-shadow: 10px 0 26px 0 rgba(0,0,0,0.3);
+        box-shadow: 1rem 0 2rem 0 rgba(0,0,0,0.27);
 
         .foodName{
-            opacity: 0;
+
         }
         .foodPhoto{
-            opacity: 1;
+            opacity: 0.65;
+            transition: all 0.3s cubic-bezier(0.705, 0, 0.290, 1);
+            transform: scale(1.03);
         }
     }
 
@@ -45,7 +52,6 @@ body {
     left: 1.25rem;
     bottom: .75rem;
     font-size: responsive;
-    font-weight: 200;
     letter-spacing: 1px;
     color: #fff;
     transition: all 0.3s ease-out;
@@ -57,8 +63,11 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    opacity: 0.3;
-    transition: all 0.5s cubic-bezier(0.705, 0, 0.290, 1.1);
+    opacity: 0.4;
+    transition: all 0.1s cubic-bezier(0.705, 0, 0.290, 1.1);
+    background-size: cover;
+    transform: scale(1.06);
+    overflow: hidden;
 }
 .AddFoodForm{
     display: none;
