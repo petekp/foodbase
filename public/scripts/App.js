@@ -58,6 +58,9 @@ class FoodList extends Component {
 }
 
 class Food extends Component {
+    componentWillMount () {
+
+    }
     componentDidMount () {
         this.setState({isSelected: false})
     }
@@ -85,8 +88,11 @@ class Food extends Component {
         }
     }
     render () {
+        var bgImageURL = `url(images/foods/` + this.props.name.toLowerCase() + `@2x.jpg)`;
+
         return (
             <div className="Food" onClick={(e) => this.handleClick(e)} data-type={this.props.type} style={{backgroundColor: this.props.hue}}>
+                <div className="foodPhoto" style={{backgroundImage: bgImageURL}}></div>
                 <span className="foodName">
                     {this.props.name}
                 </span>

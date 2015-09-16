@@ -3,6 +3,7 @@ var webpack      = require('webpack');
 var autoprefixer = require('autoprefixer');
 var precss       = require('precss');
 var rucksack     = require('rucksack-css');
+var cssnext      = require('cssnext');
 
 module.exports = {
     devtool: 'eval',
@@ -33,6 +34,6 @@ module.exports = {
         ]
     },
     postcss: function () {
-        return [autoprefixer, precss, rucksack];
+        return [cssnext, autoprefixer, precss, rucksack];
     }
 };

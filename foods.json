@@ -1,65 +1,65 @@
 [{
     "name": "Strawberries",
     "type": "fruit",
-    "hue": "red"
+    "hue": "rgba(196, 0, 12, 1)"
 }, {
     "name": "Blueberries",
     "type": "fruit",
-    "hue": "blue"
+    "hue": "rgba(26, 56, 127, 1)"
 }, {
     "name": "Oranges",
     "type": "fruit",
-    "hue": "orange"
+    "hue": "rgba(212, 142, 20, 1)"
 }, {
     "name": "Peas",
     "type": "vegetable",
-    "hue": "green"
+    "hue": "rgba(84, 131, 5, 1)"
 }, {
-    "name": "Raspberries",
+    "name": "Honey",
     "type": "fruit",
-    "hue": "indianred"
+    "hue": "rgba(240, 154, 0, 0.90)"
 }, {
     "name": "Watermelon",
     "type": "fruit",
-    "hue": "pink"
+    "hue": "rgba(205, 54, 72, 1)"
 }, {
-    "name": "Apple",
+    "name": "Apples",
     "type": "fruit",
-    "hue": "red"
-}, {
-    "name": "Bananas",
-    "type": "fruit",
-    "hue": "gold"
+    "hue": "rgba(199, 28, 14, 1)"
 }, {
     "name": "Eggplant",
     "type": "Vegetable",
-    "hue": "purple"
+    "hue": "rgba(134, 11, 144, 1)"
 }, {
     "name": "Pears",
     "type": "fruit",
-    "hue": "yellowgreen"
+    "hue": "rgba(159, 172, 10, 1)"
 }, {
-    "name": "Mango",
-    "type": "fruit",
-    "hue": "orange"
+    "name": "Onions",
+    "type": "vegetable",
+    "hue": "rgba(204, 114, 49, 1)"
 }, {
     "name": "Lettuce",
     "type": "vegetable",
-    "hue": "limegreen"
+    "hue": "rgba(148, 184, 66, 1)"
 }, {
     "name": "Carrots",
     "type": "vegetable",
-    "hue": "darkorange"
+    "hue": "rgba(236, 131, 87, 1)"
 }, {
     "name": "Broccoli",
     "type": "vegetable",
-    "hue": "forestgreen"
+    "hue": "rgba(73, 99, 17, 1)"
 }, {
     "name": "Beets",
     "type": "vegetable",
-    "hue": "crimson"
+    "hue": "rgba(173, 46, 69, 1)"
+}, {
+    "name": "Plums",
+    "type": "vegetable",
+    "hue": "rgba(182, 59, 93, 1)"
 }, {
     "name": "Mushrooms",
     "type": "vegetable",
-    "hue": "darkgoldenrod"
+    "hue": "rgba(183, 118, 21, 1)"
 }]
