@@ -34,7 +34,8 @@ body {
         opacity: 1;
         transition: all 0.3s cubic-bezier(0.45, 0, 0.290, 1);
         transform: scale(1.03);
-        box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.27);
+        box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.27), 0 0.6rem 1.4rem rgba(0,0,0,0.1);
+        border-radius: 4px;
 
         .foodName{
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -50,7 +51,7 @@ body {
 .foodName{
     position: absolute;
     left: 1.25rem;
-    bottom: .75rem;
+    bottom: .6rem;
     font-size: responsive 0.8rem 1.4rem;
     letter-spacing: 1px;
     color: #fff;
