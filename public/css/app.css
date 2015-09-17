@@ -1,17 +1,28 @@
 body {
-    background: #fff;
-    font-family: "Proxima Nova", "Georgia","Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #444;
+    font-family: "Proxima Nova", -apple-system, system, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.1rem;
     line-height: 1.7;
     font-weight: 400;
     margin: 0;
     text-rendering: optimizeLegibility;
 }
+.App{
+    -webkit-user-select: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 .FoodCart{
     -webkit-user-select: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 .FoodList{
-    transition: all 0.6s cubic-bezier(0.45, 0, 0.290, 1);
+    transition: all 0.6s cubic-bezier(0.5, 0, 0.3, 1);
     -webkit-user-select: none;
 }
 .Food{
@@ -21,7 +32,7 @@ body {
     float: left;
     padding: 25vh 0 0 0;
     text-align: center;
-    transition: all 0.1s cubic-bezier(0.45, 0, 0.290, 1);
+    transition: all 0.1s cubic-bezier(0.5, 0, 0.3, 1);
     cursor: pointer;
     overflow: hidden;
     -webkit-user-select: none;
@@ -32,7 +43,7 @@ body {
     &:hover{
         z-index: 999;
         opacity: 1;
-        transition: all 0.3s cubic-bezier(0.45, 0, 0.290, 1);
+        transition: all 0.3s cubic-bezier(0.5, 0, 0.3, 1);
         transform: scale(1.03);
         box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.27), 0 0.6rem 1.4rem rgba(0,0,0,0.1);
         border-radius: 4px;
@@ -42,7 +53,7 @@ body {
         }
         .foodPhoto{
             opacity: 0.65;
-            transition: all 0.3s cubic-bezier(0.45, 0, 0.290, 1);
+            transition: all 0.3s cubic-bezier(0.5, 0, 0.3, 1);
             transform: scale(1.03);
         }
     }
@@ -52,7 +63,7 @@ body {
     position: absolute;
     left: 1.25rem;
     bottom: .6rem;
-    font-size: responsive 0.8rem 1.4rem;
+    font-size: responsive 0.9rem 1.4rem;
     letter-spacing: 1px;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0,0,0,0);
@@ -66,7 +77,7 @@ body {
     bottom: 0;
     left: 0;
     opacity: 0.3;
-    transition: all 0.1s cubic-bezier(0.45, 0, 0.290, 1.1);
+    transition: all 0.1s cubic-bezier(0.5, 0, 0.3, 1.1);
     background-size: cover;
     background-position: center;
     transform: scale(1.06);

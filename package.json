@@ -4,6 +4,7 @@
   "description": "See what foods are in season",
   "main": "index.js",
   "dependencies": {
+    "fastclick": "^1.0.6",
     "react": "^0.13.0"
   },
   "devDependencies": {

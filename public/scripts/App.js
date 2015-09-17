@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import css from '../css/app.css'
+import FastClick from 'fastclick';
+
+window.addEventListener('load', () => {
+  FastClick.attach(document.body);
+});
 
 class App extends Component {
     constructor(props) {
