@@ -1,3 +1,5 @@
+@custom-media   --mobile (width <= 640px);
+
 body {
     background: #444;
     font-family: "Proxima Nova", -apple-system, system, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -63,7 +65,7 @@ body {
     position: absolute;
     left: 1.25rem;
     bottom: .6rem;
-    font-size: responsive 0.9rem 1.4rem;
+    font-size: responsive 1rem 1.4rem;
     letter-spacing: 1px;
     color: #fff;
     text-shadow: 0 1px 2px rgba(0,0,0,0);
@@ -99,4 +101,15 @@ body {
     background: rgba(255,255,255,0.95);
     width: 100%;
     padding: 1rem;
+}
+
+@media (max-width: 30em) {
+  .Food{
+      width: 33.333333%;
+  }
+  .foodName{
+      text-align: center;
+      left:0;
+      right:0;
+  }
 }

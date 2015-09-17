@@ -4,6 +4,7 @@ var autoprefixer = require('autoprefixer');
 var precss       = require('precss');
 var rucksack     = require('rucksack-css');
 var cssnext      = require('cssnext');
+var customMedia  = require("postcss-custom-media");
 
 module.exports = {
     devtool: 'eval',
@@ -34,6 +35,6 @@ module.exports = {
         ]
     },
     postcss: function () {
-        return [cssnext, autoprefixer, precss, rucksack];
+        return [cssnext, customMedia, autoprefixer, precss, rucksack];
     }
 };
