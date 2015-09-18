@@ -1,13 +1,15 @@
 @custom-media   --mobile (width <= 640px);
 
 body {
-    background: #444;
+    background: #fff;
     font-family: "Proxima Nova", -apple-system, system, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.1rem;
     line-height: 1.7;
     font-weight: 400;
     margin: 0;
     text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
 }
 .App{
     -webkit-user-select: none;
@@ -51,7 +53,7 @@ body {
         border-radius: 4px;
 
         .foodName{
-            text-shadow: 7px -4px 7px rgba(0,0,0,0.28);
+            text-shadow: 2px -3px 7px rgba(0,0,0,0.28);
             transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
         }
         .foodPhoto{
@@ -109,11 +111,6 @@ body {
 @media (max-width: 50em) {
   .Food{
       width: 33.333333%;
-  }
-  .foodName{
-      text-align: center;
-      left:0;
-      right:0;
   }
 }
 

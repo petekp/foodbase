@@ -51,9 +51,9 @@
     "type": "vegetable",
     "hue": "rgba(73, 99, 17, 1)"
 }, {
-    "name": "Beets",
+    "name": "LimaBeans",
     "type": "vegetable",
-    "hue": "rgba(173, 46, 69, 1)"
+    "hue": "#8E8D87"
 }, {
     "name": "Plums",
     "type": "vegetable",
