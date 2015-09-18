@@ -39,13 +39,13 @@
     "type": "vegetable",
     "hue": "rgba(204, 114, 49, 1)"
 }, {
-    "name": "Lettuce",
+    "name": "Avocados",
     "type": "vegetable",
-    "hue": "rgba(148, 184, 66, 1)"
+    "hue": "rgba(59, 83, 33, 0.90)"
 }, {
-    "name": "Carrots",
-    "type": "vegetable",
-    "hue": "rgba(236, 131, 87, 1)"
+    "name": "Cherries",
+    "type": "fruit",
+    "hue": "rgba(158, 0, 5, 0.90)"
 }, {
     "name": "Broccoli",
     "type": "vegetable",
@@ -62,4 +62,20 @@
     "name": "Mushrooms",
     "type": "vegetable",
     "hue": "rgba(183, 118, 21, 1)"
+}, {
+    "name": "Grapefruit",
+    "type": "vegetable",
+    "hue": "rgba(209, 48, 6, 0.90)"
+}, {
+    "name": "Lavender",
+    "type": "herb",
+    "hue": "#55369A"
+}, {
+    "name": "Peaches",
+    "type": "fruit",
+    "hue": "#B83C36"
+}, {
+    "name": "Asparagus",
+    "type": "vegetable",
+    "hue": "#355D19"
 }]
