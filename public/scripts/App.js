@@ -31,6 +31,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <NavPrimary />
                 <FoodList data={this.state.data} />
             </div>
         )
@@ -104,6 +105,47 @@ class Food extends Component {
                 <span className="foodName">
                     {this.props.name}
                 </span>
+            </div>
+        )
+    }
+}
+
+class NavPrimary extends Component {
+    render () {
+        return (
+            <div className="NavPrimary">
+                <span className="AppTitle">Foodbase</span>
+                <FoodFilterForm />
+            </div>
+        )
+    }
+}
+
+class FoodFilterForm extends Component {
+    render () {
+        return (
+            <div className="FoodFilterForm">
+                Show me
+                <select>
+                    <option value="All Foods">All Foods</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Herbs">Herbs</option>
+                </select>
+                in season
+                <select>
+                    <option value="May">this month</option>
+                    <option value="April">April</option>
+                    <option value="March">March</option>
+                    <option value="February">February</option>
+                </select>
+                within
+                <select>
+                    <option value="California">California</option>
+                    <option value="Arkansas">Arkansas</option>
+                    <option value="Colorado">Colorado</option>
+                    <option value="Indiana">Indiana</option>
+                </select>
             </div>
         )
     }

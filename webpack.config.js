@@ -5,6 +5,8 @@ var precss       = require('precss');
 var rucksack     = require('rucksack-css');
 var cssnext      = require('cssnext');
 var customMedia  = require("postcss-custom-media");
+var pxtorem      = require("postcss-pxtorem");
+var lost         = require("lost");
 
 module.exports = {
     devtool: 'eval',
@@ -35,6 +37,6 @@ module.exports = {
         ]
     },
     postcss: function () {
-        return [cssnext, customMedia, autoprefixer, precss, rucksack];
+        return [cssnext, lost, customMedia, autoprefixer, precss, rucksack, pxtorem];
     }
 };
