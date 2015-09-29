@@ -79,7 +79,7 @@ body {
         opacity: 1;
         transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
         transform: scale(1.03);
-        box-shadow: 0 1rem 2rem 0 rgba(0,0,0,0.27), 0 0.2rem 0.45rem rgba(0,0,0,0.16);
+        
         border-radius: 4px;
 
         .foodName{
