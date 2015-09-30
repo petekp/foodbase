@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { Router, Route, Link } from 'react-router';
 import css from '../css/app.css'
-import FastClick from 'fastclick';
+import FastClick from 'fastclick'
 
 window.addEventListener('load', () => {
   FastClick.attach(document.body);
@@ -110,10 +111,14 @@ class Food extends Component {
     }
 }
 
-class NavPrimary extends Component {
+export class NavPrimary extends Component {
     render () {
         return (
             <div className="NavPrimary">
+                <ul>
+                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/login">Login</Link></li>
+                </ul>
                 <span className="AppTitle">Foodbase</span>
                 <FoodFilterForm />
             </div>
@@ -151,7 +156,8 @@ class FoodFilterForm extends Component {
     }
 }
 
-export class FoodCart extends Component {
+
+export class Foodbase extends Component {
     render() {
         return (
             <App url="foods.json" pollInterval={2000} />

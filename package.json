@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "fastclick": "^1.0.6",
-    "react": "^0.13.0"
+    "react": "^0.13.0",
+    "react-router": "^1.0.0-rc1"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.2",
