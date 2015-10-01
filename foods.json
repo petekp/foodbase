@@ -1,0 +1,81 @@
+[{
+    "name": "Strawberries",
+    "type": "fruit",
+    "hue": "rgba(196, 0, 12, 1)"
+}, {
+    "name": "Blueberries",
+    "type": "fruit",
+    "hue": "rgba(26, 56, 127, 1)"
+}, {
+    "name": "Oranges",
+    "type": "fruit",
+    "hue": "rgba(212, 142, 20, 1)"
+}, {
+    "name": "Peas",
+    "type": "vegetable",
+    "hue": "rgba(84, 131, 5, 1)"
+}, {
+    "name": "Honey",
+    "type": "fruit",
+    "hue": "rgba(240, 154, 0, 0.90)"
+}, {
+    "name": "Watermelon",
+    "type": "fruit",
+    "hue": "rgba(205, 54, 72, 1)"
+}, {
+    "name": "Apples",
+    "type": "fruit",
+    "hue": "rgba(199, 28, 14, 1)"
+}, {
+    "name": "Eggplant",
+    "type": "Vegetable",
+    "hue": "rgba(134, 11, 144, 1)"
+}, {
+    "name": "Pears",
+    "type": "fruit",
+    "hue": "rgba(159, 172, 10, 1)"
+}, {
+    "name": "Onions",
+    "type": "vegetable",
+    "hue": "rgba(204, 114, 49, 1)"
+}, {
+    "name": "Avocados",
+    "type": "vegetable",
+    "hue": "rgba(59, 83, 33, 0.90)"
+}, {
+    "name": "Cherries",
+    "type": "fruit",
+    "hue": "rgba(158, 0, 5, 0.90)"
+}, {
+    "name": "Broccoli",
+    "type": "vegetable",
+    "hue": "rgba(73, 99, 17, 1)"
+}, {
+    "name": "LimaBeans",
+    "type": "vegetable",
+    "hue": "#8E8D87"
+}, {
+    "name": "Plums",
+    "type": "vegetable",
+    "hue": "rgba(182, 59, 93, 1)"
+}, {
+    "name": "Mushrooms",
+    "type": "vegetable",
+    "hue": "rgba(183, 118, 21, 1)"
+}, {
+    "name": "Grapefruit",
+    "type": "vegetable",
+    "hue": "rgba(209, 48, 6, 0.90)"
+}, {
+    "name": "Lavender",
+    "type": "herb",
+    "hue": "#55369A"
+}, {
+    "name": "Peaches",
+    "type": "fruit",
+    "hue": "#B83C36"
+}, {
+    "name": "Asparagus",
+    "type": "vegetable",
+    "hue": "#355D19"
+}]

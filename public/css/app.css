@@ -1,0 +1,151 @@
+@custom-media   --mobile (width <= 640px);
+@import "fontface-sanfrancisco";
+
+body {
+    background: #fff;
+    font-family: "San Francisco","Proxima Nova", -apple-system, system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+}
+.App{
+    -webkit-user-select: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.NavPrimary{
+    position: relative;
+    float: left;
+    width: 100%;
+    padding: 1rem 2rem;
+    lost-column: 12/12;
+}
+.AppTitle{
+    float: left;
+    font-size: responsive 1rem 1.8rem;
+    lost-column: 1/12;
+}
+.FoodFilterForm{
+    float: left;
+    margin: 0 80px;
+    color: #888;
+    font-size: responsive 14px 18px;
+    lost-column: 6/12;
+
+    select{
+        font-size: responsive 14px 18px;
+        margin: 0 0.6rem 0 0.2rem;
+        appearance: none;
+        padding: 0 10px;
+        line-height: 2;
+        border-radius: 10px;
+        border: 2px solid rgba(0,0,0,0.15);
+        background: none;
+    }
+}
+.FoodCart{
+    -webkit-user-select: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.FoodList{
+    transition: all 0.6s cubic-bezier(0.5, 0, 0.3, 1);
+    -webkit-user-select: none;
+}
+.Food{
+    z-index: 1;
+    position: relative;
+    width: 25%;
+    float: left;
+    padding: 29vh 0 0 0;
+    text-align: center;
+    transition: all 0.2s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-user-select: none;
+
+    &:focus{
+        filter: blur(10px);
+    }
+    &:hover{
+        z-index: 999;
+        opacity: 1;
+        transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+        transform: scale(1.03);
+        
+        border-radius: 4px;
+
+        .foodName{
+            text-shadow: 2px -3px 7px rgba(0,0,0,0.28);
+            transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+        }
+        .foodPhoto{
+            opacity: 0.65;
+            transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+            transform: scale(1);
+        }
+    }
+
+}
+.foodName{
+    position: absolute;
+    left: 1.25rem;
+    bottom: .6rem;
+    font-size: responsive 1.2rem 1.4rem;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0px 0px 0px rgba(0,0,0,0);
+    transition: all 0.2s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+
+    -webkit-user-select: none;
+}
+.foodPhoto{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.3;
+    transition: all 0.1s cubic-bezier(0.5, 0, 0.3, 1.1);
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.06);
+    overflow: hidden;
+}
+.AddFoodForm{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    width: 100%;
+    padding: 1rem;
+}
+.FilterFoodsForm{
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    width: 100%;
+    padding: 1rem;
+}
+
+
+@media (max-width: 50em) {
+  .Food{
+      width: 33.333333%;
+  }
+}
+
+@media (max-width: 30em) {
+  .Food{
+      width: 50%;
+  }
+}
