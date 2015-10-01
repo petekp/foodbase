@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, Link } from 'react-router'
+import { IndexRoute, Router, Route, Link } from 'react-router'
 import css from '../css/app.css'
 import FastClick from 'fastclick'
+import About from './About'
 
 window.addEventListener('load', () => {
   FastClick.attach(document.body);
@@ -118,7 +119,7 @@ export class NavPrimary extends Component {
             <div className="NavPrimary">
                 <ul>
                   <li><Link to="/">Home</Link></li>
-                  <li><Link to="/login">Login</Link></li>
+                  <li><Link to="/about">About</Link></li>
                 </ul>
                 <span className="AppTitle">Foodbase</span>
                 <FoodFilterForm />
