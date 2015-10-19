@@ -7,6 +7,8 @@ var cssnext      = require('cssnext');
 var customMedia  = require("postcss-custom-media");
 var pxtorem      = require("postcss-pxtorem");
 var lost         = require("lost");
+var Parse        = require('parse');
+var ParseReact   = require('parse-react');
 
 module.exports = {
     devtool: 'eval',
