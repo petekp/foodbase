@@ -27,7 +27,7 @@ body {
 }
 .AppTitle{
     float: left;
-    font-size: responsive 1rem 1.8rem;
+    font-size: responsive 1rem 2rem;
     lost-column: 1/12;
 }
 .FoodFilterForm{
@@ -79,7 +79,7 @@ body {
         opacity: 1;
         transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
         transform: scale(1.03);
-        
+
         border-radius: 4px;
 
         .foodName{

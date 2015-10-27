@@ -146,9 +146,14 @@ export class NavPrimary extends Component {
 
 class FoodFilterForm extends ParseComponent {
     mixins: [ParseReact.Mixin]
+
     observe() {
         return {
-          months: new Parse.Query('Months')
+          months: new Parse.Query('Months'),
+          foods: new Parse.Query('Foods'),
+          locations: new Parse.Query('Locations'),
+          types: new Parse.Query('Types'),
+          seasonality: new Parse.Query('FLM').include("food")
         }
     }
     render () {
@@ -157,23 +162,26 @@ class FoodFilterForm extends ParseComponent {
                 Show me
                 <select>
                     <option value="All Foods">All Foods</option>
-                    <option value="Fruits">Fruits</option>
-                    <option value="Vegetables">Vegetables</option>
-                    <option value="Herbs">Herbs</option>
+                        {this.data.types.map(function(type) {
+                          return <option id="{type.id}">{type.name}</option>
+                        })}
                 </select>
                 in season
                 <select>
-                {this.data.months.map(function(c) {
-                  return <option id="{c.id}">{c.name}</option>
-                })}
+                    {this.data.months.map(function(month) {
+                      return <option id="{month.id}">{month.name}</option>
+                    })}
                 </select>
-
                 within
                 <select>
-                    <option value="California">California</option>
-                    <option value="Arkansas">Arkansas</option>
-                    <option value="Colorado">Colorado</option>
-                    <option value="Indiana">Indiana</option>
+                    {this.data.locations.map(function(location) {
+                      return <option id="{location.id}">{location.name}</option>
+                    })}
+                </select>
+                <select>
+                    {this.data.seasonality.map(function(s) {
+                      return <option>{s.location.objectId}</option>
+                    })}
                 </select>
             </div>
         )
