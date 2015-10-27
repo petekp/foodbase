@@ -5,15 +5,24 @@ import css from '../css/app.css'
 import FastClick from 'fastclick'
 import About from './About'
 
+import Parse from 'parse'
+import ParseReact from 'parse-react'
+var ParseComponent = ParseReact.Component(React);
+Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPeayTt7gTyAP4iXnS7rpND8x');
+
 window.addEventListener('load', () => {
   FastClick.attach(document.body);
 });
 
 class App extends Component {
+
+
     constructor(props) {
         super(props)
         this.state = {data: []}
     }
+
+
     componentDidMount() {
         this.loadFoodsFromServer()
         setInterval((e) => this.loadFoodsFromServer, this.props.pollInterval)
@@ -36,12 +45,15 @@ class App extends Component {
             <div className="App">
                 <NavPrimary />
                 <FoodList data={this.state.data} />
+
             </div>
+
         )
     }
 }
 
 class FoodList extends Component {
+
     sortByKey (array, key) {
         return array.sort((a, b) => {
             let x = a[key],
@@ -61,7 +73,9 @@ class FoodList extends Component {
         return (
             <div className="FoodList">
                 {foodNodes}
+
             </div>
+
         )
     }
 }
@@ -114,6 +128,7 @@ class Food extends Component {
 }
 
 export class NavPrimary extends Component {
+
     render () {
         return (
             <div className="NavPrimary">
@@ -123,12 +138,19 @@ export class NavPrimary extends Component {
                 </ul>
                 <span className="AppTitle">Foodbase</span>
                 <FoodFilterForm />
+
             </div>
         )
     }
 }
 
-class FoodFilterForm extends Component {
+class FoodFilterForm extends ParseComponent {
+    mixins: [ParseReact.Mixin]
+    observe() {
+        return {
+          months: new Parse.Query('Months')
+        }
+    }
     render () {
         return (
             <div className="FoodFilterForm">
@@ -141,11 +163,11 @@ class FoodFilterForm extends Component {
                 </select>
                 in season
                 <select>
-                    <option value="May">this month</option>
-                    <option value="April">April</option>
-                    <option value="March">March</option>
-                    <option value="February">February</option>
+                {this.data.months.map(function(c) {
+                  return <option id="{c.id}">{c.name}</option>
+                })}
                 </select>
+
                 within
                 <select>
                     <option value="California">California</option>
