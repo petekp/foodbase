@@ -3,7 +3,6 @@ import ReactDOM, { render } from 'react-dom'
 import { IndexRoute, Router, Route, Link } from 'react-router'
 import css from '../css/app.css'
 import FastClick from 'fastclick'
-import About from './About'
 
 import Parse from 'parse'
 import ParseReact from 'parse-react'
@@ -45,7 +44,6 @@ class App extends Component {
             <div className="App">
                 <NavPrimary />
                 <FoodList data={this.state.data} />
-
             </div>
 
         )
@@ -128,17 +126,11 @@ class Food extends Component {
 }
 
 export class NavPrimary extends Component {
-
     render () {
         return (
             <div className="NavPrimary">
-                <ul>
-                  <li><Link to="/">Home</Link></li>
-                  <li><Link to="/about">About</Link></li>
-                </ul>
-                <span className="AppTitle">Foodbase</span>
+                <span className="AppTitle"></span>
                 <FoodFilterForm />
-
             </div>
         )
     }
@@ -153,8 +145,18 @@ class FoodFilterForm extends ParseComponent {
           foods: new Parse.Query('Foods'),
           locations: new Parse.Query('Locations'),
           types: new Parse.Query('Types'),
-          seasonality: new Parse.Query('FLM').include("food")
+          seasonality: new Parse.Query('FLM')
         }
+    }
+    showSeasonalFoods () {
+        let flmQuery = new Parse.Query("FLM")
+        let seasonality = this.data.seasonality
+        let inSeasonFoods = seasonality.filter(el =>
+            el.month.name == "August"
+        )
+
+        console.log(inSeasonFoods[0].food.name)
+        return inSeasonFoods[0].food.name
     }
     render () {
         return (
@@ -179,9 +181,7 @@ class FoodFilterForm extends ParseComponent {
                     })}
                 </select>
                 <select>
-                    {this.data.seasonality.map(function(s) {
-                      return <option>{s.location.objectId}</option>
-                    })}
+                    <option>{this.showSeasonalFoods()}</option>
                 </select>
             </div>
         )

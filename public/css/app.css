@@ -28,14 +28,14 @@ body {
 .AppTitle{
     float: left;
     font-size: responsive 1rem 2rem;
-    lost-column: 1/12;
+    display: none;
 }
 .FoodFilterForm{
     float: left;
     margin: 0 80px;
     color: #888;
     font-size: responsive 14px 18px;
-    lost-column: 6/12;
+    lost-column: 12/12;
 
     select{
         font-size: responsive 14px 18px;
@@ -44,7 +44,7 @@ body {
         padding: 0 10px;
         line-height: 2;
         border-radius: 10px;
-        border: 2px solid rgba(0,0,0,0.15);
+        border: 1px solid rgba(0,0,0,0.15);
         background: none;
     }
 }
@@ -80,15 +80,13 @@ body {
         transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
         transform: scale(1.03);
 
-        border-radius: 4px;
-
         .foodName{
             text-shadow: 2px -3px 7px rgba(0,0,0,0.28);
             transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
         }
         .foodPhoto{
             opacity: 0.65;
-            transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+            transition: transform 4s ease-out, opacity 1s cubic-bezier(0.250, 0.250, 0.000, 0.990);
             transform: scale(1);
         }
     }
