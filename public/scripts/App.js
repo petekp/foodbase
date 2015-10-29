@@ -14,13 +14,10 @@ window.addEventListener('load', () => {
 });
 
 class App extends Component {
-
-
     constructor(props) {
         super(props)
         this.state = {data: []}
     }
-
 
     componentDidMount() {
         this.loadFoodsFromServer()
@@ -51,7 +48,6 @@ class App extends Component {
 }
 
 class FoodList extends Component {
-
     sortByKey (array, key) {
         return array.sort((a, b) => {
             let x = a[key],
@@ -152,11 +148,12 @@ class FoodFilterForm extends ParseComponent {
         let flmQuery = new Parse.Query("FLM")
         let seasonality = this.data.seasonality
         let inSeasonFoods = seasonality.filter(el =>
-            el.month.name == "August"
+            el.month.name == "May"
         )
 
-        console.log(inSeasonFoods[0].food.name)
-        return inSeasonFoods[0].food.name
+        inSeasonFoods.forEach(i => {
+            console.log(i.food.name)
+        })
     }
     render () {
         return (
