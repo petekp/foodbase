@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import NavPrimary from '../NavPrimary/NavPrimary'
 import FoodList from '../FoodList/FoodList'
 import $ from 'jQuery'
 // import SpringText from '../Helpers/SpringText'
@@ -23,7 +24,10 @@ export default class Index extends Component {
     }
     render() {
         return(
-            <FoodList data={this.state.data} />
+            <div>
+                <NavPrimary />
+                <FoodList data={this.state.data} />
+            </div>
         )
     }
 }

@@ -7,8 +7,9 @@ import $ from 'jQuery'
 
 import Parse from 'parse'
 import ParseReact from 'parse-react'
-var ParseComponent = ParseReact.Component(React);
-Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPeayTt7gTyAP4iXnS7rpND8x');
+
+var ParseComponent = ParseReact.Component(React)
+Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPeayTt7gTyAP4iXnS7rpND8x')
 
 class App extends Component{
     constructor(props) {
@@ -20,7 +21,7 @@ class App extends Component{
             <RouteTransition pathname={this.props.location.pathname} defaultStyles={{opacity: 0, scale: 0}}>
                 {this.props.children}
             </RouteTransition>
-        </div>;
+        </div>
     }
 }
 

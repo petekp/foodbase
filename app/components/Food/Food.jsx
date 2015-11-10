@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import ReactDOM, { render } from 'react-dom'
+import $ from 'jQuery'
+import './Food.css'
 
 export default class Food extends Component {
     componentWillMount () {
@@ -34,7 +37,7 @@ export default class Food extends Component {
         this.zoom()
     }
     render () {
-        var bgImageURL = `url(images/foods/` + this.props.name.toLowerCase() + `@2x.jpg)`;
+        var bgImageURL = `url(app/images/foods/` + this.props.name.toLowerCase() + `@2x.jpg)`;
 
         return (
             <div className="Food" onClick={(e) => this.handleClick(e)} data-type={this.props.type} style={{backgroundColor: this.props.hue}}>

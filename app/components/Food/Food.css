@@ -1,0 +1,70 @@
+.Food{
+    z-index: 1;
+    position: relative;
+    width: 25%;
+    float: left;
+    padding: 29vh 0 0 0;
+    text-align: center;
+    transition: all 0.2s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-user-select: none;
+
+    &:focus{
+        filter: blur(10px);
+    }
+    &:hover{
+        z-index: 999;
+        opacity: 1;
+        transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+        transform: scale(1.03);
+
+        .foodName{
+            text-shadow: 2px -3px 7px rgba(0,0,0,0.28);
+            transition: all 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+        }
+        .foodPhoto{
+            opacity: 0.65;
+            transition: transform 4s ease-out, opacity 1s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+            transform: scale(1);
+        }
+    }
+
+}
+.foodName{
+    position: absolute;
+    left: 1.25rem;
+    bottom: .6rem;
+    font-size: responsive 1.2rem 1.4rem;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0px 0px 0px rgba(0,0,0,0);
+    transition: all 0.2s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+
+    -webkit-user-select: none;
+}
+.foodPhoto{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.3;
+    transition: all 0.1s cubic-bezier(0.5, 0, 0.3, 1.1);
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.06);
+    overflow: hidden;
+}
+
+@media (max-width: 50em) {
+  .Food{
+      width: 33.333333%;
+  }
+}
+
+@media (max-width: 30em) {
+  .Food{
+      width: 50%;
+  }
+}

@@ -17,7 +17,7 @@
 }, {
     "name": "Honey",
     "type": "fruit",
-    "hue": "rgba(240, 154, 0, 0.90)"
+    "hue": "rgba(240, 154, 0, 1)"
 }, {
     "name": "Watermelon",
     "type": "fruit",
@@ -41,11 +41,11 @@
 }, {
     "name": "Avocados",
     "type": "vegetable",
-    "hue": "rgba(59, 83, 33, 0.90)"
+    "hue": "rgba(59, 83, 33, 1)"
 }, {
     "name": "Cherries",
     "type": "fruit",
-    "hue": "rgba(158, 0, 5, 0.90)"
+    "hue": "rgba(158, 0, 5, 1)"
 }, {
     "name": "Broccoli",
     "type": "vegetable",
@@ -65,7 +65,7 @@
 }, {
     "name": "Grapefruit",
     "type": "vegetable",
-    "hue": "rgba(209, 48, 6, 0.90)"
+    "hue": "rgba(209, 48, 6, 1)"
 }, {
     "name": "Lavender",
     "type": "herb",

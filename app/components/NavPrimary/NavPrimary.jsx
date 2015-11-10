@@ -5,7 +5,7 @@ export default class NavPrimary extends Component {
     render () {
         return (
             <div className="NavPrimary">
-                <span className="AppTitle"></span>
+                <span className="AppTitle">Foodbase</span>
                 <FoodFilterForm />
             </div>
         )

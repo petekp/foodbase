@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import SpringText from '../Helpers/SpringText';
+import React, { Component } from 'react'
+import SpringText from '../Helpers/SpringText'
 
 export default class Navigation extends Component {
     render() {
