@@ -48,6 +48,7 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-motion": "^0.3.1",
-    "react-router": "^1.0.0-rc3"
+    "react-router": "^1.0.0-rc3",
+    "tcomb-form": "^0.7.6"
   }
 }
