@@ -1,0 +1,29 @@
+.FoodCreateForm{
+    width: 100%;
+    vertical-align: top;
+    float: left;
+    color: #888;
+    font-size: responsive 14px 18px;
+    lost-column: 12/12;
+
+    select{
+        padding: 2rem;
+        lost-column: 3/12;
+        height: 100%;
+        float: left;
+        vertical-align: top;
+        font-size: responsive 20px 30px;
+        appearance: none;
+        line-height: 2;
+        background: none;
+        border: none;
+
+        &:focus{
+            outline: 0;
+        }
+
+        option{
+            padding: 0.2rem 1rem;
+        }
+    }
+}
