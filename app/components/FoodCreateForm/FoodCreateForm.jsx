@@ -14,9 +14,6 @@ export default class FoodCreateForm extends ParseComponent {
         this.state = {value: null}
         this.change = this.change.bind(this)
     }
-    componentDidMount(props) {
-        this.state.value = "kaaa"
-    }
     change(event){
         this.state.value = event.target.value
         console.log(this.state.value)
