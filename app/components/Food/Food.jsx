@@ -34,6 +34,10 @@ export default class Food extends Component {
     }
     handleClick (e) {
         this.setState({isSelected:!this.state.isSelected})
+        if(!this.state.isSelected){
+            console.log(this.props.name)
+        }
+
         this.zoom()
     }
     render () {
