@@ -9,7 +9,7 @@ export default class FoodList extends Component {
             return ((x < y) ? -1 : ((x > y) ? 1 : 0))
         })
     }
-    render () {
+    render() {
         let sortedArray = this.sortByKey(this.props.data, "name")
         let foodNodes = sortedArray.map((food, index) => {
             return (

@@ -5,25 +5,55 @@
     color: #888;
     font-size: responsive 14px 18px;
     lost-column: 12/12;
+}
+.column{
+    lost-column: 3/12;
+    float: left;
+    padding: 2rem;
+}
 
-    select{
-        padding: 2rem;
-        lost-column: 3/12;
-        height: 100%;
-        float: left;
-        vertical-align: top;
-        font-size: responsive 20px 30px;
-        appearance: none;
-        line-height: 2;
-        background: none;
-        border: none;
+.newFoodForm{
+    input{
+        lost-column: 5/8 1;
+    }
+    button{
+        lost-column: 3/8;
+    }
+}
+input, select{
+    appearance: none;
+}
+input{
+    padding: 0 1rem;
+    margin: 0 0 0.4rem;
+    font-size: responsive 14px 22px;
+    line-height: 2;
+}
+select{
+    font-size: responsive 18px 28px;
+    line-height: 2;
+    border: none;
 
-        &:focus{
-            outline: 0;
-        }
+    &:focus{
+        outline: 0;
+    }
+    option{
+        padding: 0.2rem 1rem;
+    }
+}
+button{
+    appearance: none;
+    padding: 0.5rem 0;
+    line-height: 2;
+    border: none;
+    background: #000;
+    color: #eee;
+    font-size: responsive 10px 16px;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    cursor: pointer;
 
-        option{
-            padding: 0.2rem 1rem;
-        }
+    &:hover{
+        background: #333;
     }
 }

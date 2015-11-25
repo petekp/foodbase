@@ -26,7 +26,7 @@ export default class Food extends Component {
         deltaX = $elParentOffset.left + (($windowCenterX * scale) - ($elCenterX * scale))
         deltaY = $elParentOffset.top + ($windowCenterY - ($elCenterY * scale))
 
-        if(this.state.isSelected){
+        if (this.state.isSelected) {
             $elParent.css('transform', `translate(0px,0px) scale(1)`)
         } else{
             $elParent.css(`transform`, `translate(${deltaX}px,${deltaY}px) scale(${scale})`)
@@ -34,13 +34,12 @@ export default class Food extends Component {
     }
     handleClick (e) {
         this.setState({isSelected:!this.state.isSelected})
-        if(!this.state.isSelected){
+        if (!this.state.isSelected) {
             console.log(this.props.name)
         }
-
         this.zoom()
     }
-    render () {
+    render() {
         var bgImageURL = `url(app/images/foods/` + this.props.name.toLowerCase() + `@2x.jpg)`;
 
         return (

@@ -47,7 +47,7 @@ export default class FoodFilterForm extends ParseComponent {
         this.state.location = event.target.value
         console.log(this.state.location)
     }
-    render () {
+    render() {
         return (
             <div className="FoodFilterForm">
                 Show me

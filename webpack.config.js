@@ -34,10 +34,10 @@ var common = {
         /* Resolves extensions to require('file') instead of require('file.js') */
         extensions: ['', '.js', '.jsx', '.json']
     },
-    postcss: function () {
+    postcss: function() {
         return [
             postcssImport({
-                onImport: function (files) {
+                onImport: function(files) {
                     files.forEach(this.addDependency);
                 }.bind(this)
             }),
@@ -57,17 +57,15 @@ var common = {
     ]
 }
 
-if(TARGET === 'start' || !TARGET) {
+if (TARGET === 'start' || !TARGET) {
     module.exports = merge(common, {
         devtool: 'source-map',
         module: {
-            loaders: [
-                {
-                    test: /\.jsx?$/,
-                    loaders: ['babel'],
-                    include: path.resolve(ROOT_PATH, 'app')
-                }
-            ]
+            loaders: [{
+                test: /\.jsx?$/,
+                loaders: ['babel'],
+                include: path.resolve(ROOT_PATH, 'app')
+            }]
         },
         devServer: {
             historyApiFallback: true,

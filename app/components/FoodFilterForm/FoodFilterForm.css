@@ -1,9 +1,8 @@
 .FoodFilterForm{
-    float: left;
-    margin: 0 80px;
+    lost-column: 10/12;
+    margin: 0.6% 0 0;
     color: #888;
     font-size: responsive 14px 18px;
-    lost-column: 12/12;
 
     select{
         font-size: responsive 14px 18px;

@@ -13,10 +13,15 @@ export default class FoodCreateForm extends ParseComponent {
         super(props)
         this.state = {value: null}
         this.change = this.change.bind(this)
+        this.addFood = this.addFood.bind(this)
     }
     change(event){
         this.state.value = event.target.value
         console.log(this.state.value)
+    }
+    addFood() {
+
+        console.log(this.refs.newFoodInput.value)
     }
     observe() {
         return {
@@ -37,30 +42,37 @@ export default class FoodCreateForm extends ParseComponent {
             // console.log(i.food.name)
         })
     }
-    render () {
+    render() {
         return (
             <div className="FoodCreateForm">
-                <select size={1 + this.data.foods.length} onChange={this.change} value={this.state.value}>
-                    {this.data.foods.map(function(type) {
-                      return <option id="{type.id}">{type.name}</option>
-                    })}
-                </select>
-                <select size={1 + this.data.types.length}>
+                <div className="column">
+                    <select size={1 + this.data.foods.length} onChange={this.change} value={this.state.value}>
+                        {this.data.foods.map(function(type) {
+                          return <option id="{type.id}">{type.name}</option>
+                        })}
+                    </select>
+                    <div className="newFoodForm">
+                        <input ref="newFoodInput" type="text" defaultValue="Hello!" />
+                        <button onClick={this.addFood} type="button">Add</button>
+                    </div>
+                </div>
+
+                <div className="column"><select size={1 + this.data.types.length}>
                     <option value="All Foods">All Foods</option>
                         {this.data.types.map(function(type) {
                           return <option id="{type.id}">{type.name}</option>
                         })}
-                </select>
-                <select size={1 + this.data.locations.length}>
+                </select></div>
+                <div className="column"><select size={1 + this.data.locations.length}>
                     {this.data.locations.map(function(location) {
                       return <option id="{location.id}">{location.name}</option>
                     })}
-                </select>
-                <select multiple size={1 + this.data.months.length}>
+                </select></div>
+            <div className="column"><select multiple size={1 + this.data.months.length}>
                     {this.data.months.map(function(month) {
                       return <option id="{month.id}">{month.name}</option>
                     })}
-                </select>
+                </select></div>
             </div>
         )
     }
