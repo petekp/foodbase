@@ -20,8 +20,9 @@ export default class FoodCreateForm extends ParseComponent {
         console.log(this.state.value)
     }
     addFood() {
-
-        console.log(this.refs.newFoodInput.value)
+        ParseReact.Mutation.Create('Foods', {
+          name: this.refs.newFoodInput.value
+        }).dispatch();
     }
     observe() {
         return {
