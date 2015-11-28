@@ -13,7 +13,7 @@ export default class FoodList extends Component {
         let sortedArray = this.sortByKey(this.props.data, "name")
         let foodNodes = sortedArray.map((food, index) => {
             return (
-                <Food key={index} name={food.name} type={food.type} hue={food.hue}>
+                <Food id={food.id} key={index} name={food.name} type={food.type} hue={food.hue}>
                     {food.text}
                 </Food>
             )

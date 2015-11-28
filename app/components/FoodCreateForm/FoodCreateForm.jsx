@@ -43,13 +43,13 @@ export default class FoodCreateForm extends ParseComponent {
         })
     }
     render() {
-        console.log(this.data.locations[0])
+
         return (
             <div className="FoodCreateForm">
                 <div className="column">
                     <select size={this.data.foods.length + 1} onChange={this.change} value={this.state.food}>
                         {this.data.foods.map(function(food) {
-                          return <option id={food.objectId}>{food.name}</option>
+                          return <option key={food.objectId}>{food.name}</option>
                         })}
                     </select>
                     <div className="newFoodForm">
@@ -61,7 +61,7 @@ export default class FoodCreateForm extends ParseComponent {
                 <div className="column">
                     <select size={this.data.types.length + 1}>
                         {this.data.types.map(function(type) {
-                          return <option id={type.objectId}>{type.name}</option>
+                          return <option key={type.objectId} >{type.name}</option>
                         })}
                     </select>
                 </div>
@@ -69,7 +69,7 @@ export default class FoodCreateForm extends ParseComponent {
                 <div className="column">
                     <select size={1 + this.data.locations.length}>
                         {this.data.locations.map(function(location) {
-                          return <option id={location.objectId}>{location.name}</option>
+                          return <option key={location.objectId} >{location.name}</option>
                         })}
                     </select>
                 </div>
@@ -77,7 +77,7 @@ export default class FoodCreateForm extends ParseComponent {
                 <div className="column">
                     <select multiple size={1 + this.data.months.length}>
                         {this.data.months.map(function(month) {
-                          return <option id={month.objectId}>{month.name}</option>
+                          return <option key={month.objectId} >{month.name}</option>
                         })}
                     </select>
                 </div>
