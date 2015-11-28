@@ -26,7 +26,7 @@ export default class Index extends Component {
         return(
             <div>
                 <NavPrimary />
-                <FoodList data={this.state.data} />
+                <FoodList foods={this.state.data} />
             </div>
         )
     }

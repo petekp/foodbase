@@ -1,4 +1,4 @@
-export function sortByKey(array, key) {
+export default function sortByKey(array, key) {
     return array.sort((a, b) => {
         let x = a[key],
             y = b[key]
