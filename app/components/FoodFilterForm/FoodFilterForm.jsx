@@ -52,21 +52,20 @@ export default class FoodFilterForm extends ParseComponent {
             <div className="FoodFilterForm">
                 Show me
                 <select onChange={this.typeChange}>
-                    <option value="All Foods">All Foods</option>
-                        {this.data.types.map(function(type) {
-                          return <option id="{type.id}">{type.name}</option>
-                        })}
+                    {this.data.types.map(function(type) {
+                      return <option key={type.objectId}>{type.name}</option>
+                    })}
                 </select>
                 in season
                 <select onChange={this.timeChange}>
                     {this.data.months.map(function(month) {
-                      return <option id="{month.id}">{month.name}</option>
+                      return <option key={month.objectId}>{month.name}</option>
                     })}
                 </select>
                 within
                 <select onChange={this.locationChange}>
                     {this.data.locations.map(function(location) {
-                      return <option id="{location.id}">{location.name}</option>
+                      return <option key={location.objectId}>{location.name}</option>
                     })}
                 </select>
                 <select>
