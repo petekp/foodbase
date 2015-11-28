@@ -11,13 +11,13 @@ export default class FoodCreateForm extends ParseComponent {
 
     constructor(props) {
         super(props)
-        this.state = {value: null}
+        this.state = {food: null}
         this.change = this.change.bind(this)
         this.addFood = this.addFood.bind(this)
     }
     change(event){
-        this.state.value = event.target.value
-        console.log(this.state.value)
+        this.state.food = event.target.value
+        console.log(this.state.food)
     }
     addFood() {
         ParseReact.Mutation.Create('Foods', {
@@ -38,18 +38,18 @@ export default class FoodCreateForm extends ParseComponent {
         let inSeasonFoods = seasonality.filter(el =>
             el.month.name == "May"
         )
-
         inSeasonFoods.forEach(i => {
             // console.log(i.food.name)
         })
     }
     render() {
+        console.log(this.data.locations[0])
         return (
             <div className="FoodCreateForm">
                 <div className="column">
-                    <select size={1 + this.data.foods.length} onChange={this.change} value={this.state.value}>
-                        {this.data.foods.map(function(type) {
-                          return <option id="{type.id}">{type.name}</option>
+                    <select size={this.data.foods.length + 1} onChange={this.change} value={this.state.food}>
+                        {this.data.foods.map(function(food) {
+                          return <option id={food.objectId}>{food.name}</option>
                         })}
                     </select>
                     <div className="newFoodForm">
@@ -58,22 +58,29 @@ export default class FoodCreateForm extends ParseComponent {
                     </div>
                 </div>
 
-                <div className="column"><select size={1 + this.data.types.length}>
-                    <option value="All Foods">All Foods</option>
+                <div className="column">
+                    <select size={this.data.types.length + 1}>
                         {this.data.types.map(function(type) {
-                          return <option id="{type.id}">{type.name}</option>
+                          return <option id={type.objectId}>{type.name}</option>
                         })}
-                </select></div>
-                <div className="column"><select size={1 + this.data.locations.length}>
-                    {this.data.locations.map(function(location) {
-                      return <option id="{location.id}">{location.name}</option>
-                    })}
-                </select></div>
-            <div className="column"><select multiple size={1 + this.data.months.length}>
-                    {this.data.months.map(function(month) {
-                      return <option id="{month.id}">{month.name}</option>
-                    })}
-                </select></div>
+                    </select>
+                </div>
+
+                <div className="column">
+                    <select size={1 + this.data.locations.length}>
+                        {this.data.locations.map(function(location) {
+                          return <option id={location.objectId}>{location.name}</option>
+                        })}
+                    </select>
+                </div>
+
+                <div className="column">
+                    <select multiple size={1 + this.data.months.length}>
+                        {this.data.months.map(function(month) {
+                          return <option id={month.objectId}>{month.name}</option>
+                        })}
+                    </select>
+                </div>
             </div>
         )
     }
