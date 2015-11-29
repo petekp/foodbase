@@ -21,9 +21,24 @@ export default class FoodCreateForm extends ParseComponent {
     changeFood = (e) => {
         this.state.food = e.target.value
     }
+    changeType = (e) => {
+        this.state.type = e.target.value
+        console.log(this.state.type)
+    }
     addFood = () => {
+        let types = this.data.types
+        let selectedType = types.filter(type =>
+            type.name == this.state.type
+        )
+        let typeId = selectedType[0].objectId
+
         ParseReact.Mutation.Create('Foods', {
-          name: this.refs.newFoodInput.value
+          name: this.refs.newFoodInput.value,
+          type: {
+              __type: "Pointer",
+              className: "Types",
+              objectId: typeId
+          }
         }).dispatch();
     }
     removeFood = (food) => {
@@ -51,6 +66,7 @@ export default class FoodCreateForm extends ParseComponent {
         )
     }
     render() {
+        console.log(this.data.foods)
         return (
             <div className="FoodCreateForm">
 
@@ -70,7 +86,7 @@ export default class FoodCreateForm extends ParseComponent {
                 </div>
 
                 <div className="column">
-                    <select size={this.data.types.length + 1}>
+                    <select onChange={this.changeType} size={this.data.types.length + 1}>
                         {this.data.types.map(function(type) {
                           return <option key={type.objectId} >{type.name}</option>
                         })}
