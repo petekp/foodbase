@@ -15,7 +15,8 @@ export default class FoodCreateForm extends ParseComponent {
             food: null,
             type: null,
             location: null,
-            month: null
+            month: null,
+            pollInterval: 500
         }
     }
     changeFood = (e) => {
@@ -23,7 +24,6 @@ export default class FoodCreateForm extends ParseComponent {
     }
     changeType = (e) => {
         this.state.type = e.target.value
-        console.log(this.state.type)
     }
     addFood = () => {
         let types = this.data.types
@@ -40,6 +40,9 @@ export default class FoodCreateForm extends ParseComponent {
               objectId: typeId
           }
         }).dispatch();
+
+        this.refs.newFoodInput.value = ''
+        this.refs.newFoodInput.focus()
     }
     removeFood = (food) => {
         let foods = this.data.foods
@@ -59,6 +62,10 @@ export default class FoodCreateForm extends ParseComponent {
           seasonality: new Parse.Query('FLM')
         }
     }
+    componentDidMount() {
+        this.observe()
+        setInterval(this.observe, this.state.pollInterval);
+    }
     showSeasonalFoods() {
         let seasonality = this.data.seasonality
         let inSeasonFoods = seasonality.filter(el =>
@@ -66,26 +73,26 @@ export default class FoodCreateForm extends ParseComponent {
         )
     }
     render() {
-        console.log(this.data.foods)
         return (
             <div className="FoodCreateForm">
+                <div className="actions">
+                    <input ref="newFoodInput" type="text" defaultValue="" placeholder="Food" />
+                    <button onClick={this.addFood} type="button">Add</button>
 
-                <div className="column">
+                    <button className="button--red" onClick={this.removeFood} type="button">Remove</button>
+                </div>
+
+                <div className="foods column">
+                    <h2>Foods</h2>
                     <select size={this.data.foods.length + 1} onChange={this.changeFood}>
                         {this.data.foods.map(function(food) {
                           return <option key={food.objectId}>{food.name}</option>
                         })}
                     </select>
-                    <p>
-                        <button className="button--red" onClick={this.removeFood} type="button">Remove</button>
-                    </p>
-                    <div className="newFoodForm">
-                        <input ref="newFoodInput" type="text" defaultValue="Hello!" />
-                        <button onClick={this.addFood} type="button">Add</button>
-                    </div>
                 </div>
 
-                <div className="column">
+                <div className="types column">
+                    <h2>Types</h2>
                     <select onChange={this.changeType} size={this.data.types.length + 1}>
                         {this.data.types.map(function(type) {
                           return <option key={type.objectId} >{type.name}</option>
@@ -93,7 +100,8 @@ export default class FoodCreateForm extends ParseComponent {
                     </select>
                 </div>
 
-                <div className="column">
+                <div className="locations column">
+                    <h2>Locations</h2>
                     <select size={this.data.locations.length + 1}>
                         {this.data.locations.map(function(location) {
                           return <option key={location.objectId} >{location.name}</option>
@@ -101,8 +109,9 @@ export default class FoodCreateForm extends ParseComponent {
                     </select>
                 </div>
 
-                <div className="column">
-                    <select multiple size={this.data.months.length + 1}>
+                <div className="months column">
+                    <h2>Months</h2>
+                    <select multiple={true} size={this.data.months.length + 1}>
                         {this.data.months.map(function(month) {
                           return <option key={month.objectId} >{month.name}</option>
                         })}

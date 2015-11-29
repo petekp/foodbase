@@ -5,20 +5,25 @@
     color: #888;
     font-size: responsive 14px 18px;
     lost-column: 12/12;
+    padding: 1rem;
 }
 .column{
     lost-column: 3/12;
     float: left;
 }
-
-.newFoodForm{
-    input{
-        lost-column: 7/12 1;
-    }
-    button{
-        lost-column: 5/12;
-    }
+h2{
+    font-size: responsive 14px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: #aaa;
+    font-weight: 200;
+    margin-bottom: 0.5rem;
 }
+
+.actions{
+    lost-column: 12/12;
+}
+
 input, select{
     appearance: none;
 }
@@ -27,22 +32,28 @@ input{
     margin: 0 0 0.4rem;
     font-size: responsive 14px 22px;
     line-height: 2;
+    vertical-align: top;
+    height: 3rem;
 }
 select{
-    font-size: responsive 18px 28px;
-    line-height: 2;
+    font-size: responsive 15px 22px;
     border: none;
+    overflow: visible;
 
     &:focus{
         outline: 0;
     }
     option{
-        padding: 0.2rem 1rem;
+        display: inline-block;
+        float: left;
+        width: 100%;
+        padding: 0.2rem 0.4rem;
+        margin-left: -0.4rem;
     }
 }
 button{
     appearance: none;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     line-height: 2;
     border: none;
     background: #000;
@@ -51,11 +62,18 @@ button{
     letter-spacing: 0.15rem;
     text-transform: uppercase;
     cursor: pointer;
+    vertical-align: top;
+    height: 3rem;
 
     &:hover{
         background: #333;
     }
 }
 .button--red{
-    background: red;
+    @extend button;
+    float: right;
+
+    &, &:hover{
+        background: red;
+    }
 }
