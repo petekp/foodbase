@@ -15,15 +15,27 @@ export default class FoodCreateForm extends ParseComponent {
             food: null,
             type: null,
             location: null,
-            month: null,
-            pollInterval: 500
+            month: null
+        }
+    }
+    observe(props, state) {
+        return {
+          months: new Parse.Query('Months'),
+          foods: new Parse.Query('Foods'),
+          locations: new Parse.Query('Locations'),
+          types: new Parse.Query('Types'),
+          seasonality: new Parse.Query('FLM')
         }
     }
     changeFood = (e) => {
         this.state.food = e.target.value
-    }
-    changeType = (e) => {
-        this.state.type = e.target.value
+        let foods = this.data.foods
+        let thisFood = foods.filter(food =>
+            food.name == this.state.food
+        )
+        this.state.type = thisFood[0].type.objectId
+        console.log(thisFood)
+
     }
     addFood = () => {
         let types = this.data.types
@@ -51,20 +63,9 @@ export default class FoodCreateForm extends ParseComponent {
         )
         let id = selectedFoods[0]
         ParseReact.Mutation.Destroy(id).dispatch();
-        // console.log(selectedFoods[0].objectId)
     }
-    observe() {
-        return {
-          months: new Parse.Query('Months'),
-          foods: new Parse.Query('Foods'),
-          locations: new Parse.Query('Locations'),
-          types: new Parse.Query('Types'),
-          seasonality: new Parse.Query('FLM')
-        }
-    }
-    componentDidMount() {
-        this.observe()
-        setInterval(this.observe, this.state.pollInterval);
+    changeType = (e) => {
+        this.state.type = e.target.value
     }
     showSeasonalFoods() {
         let seasonality = this.data.seasonality
@@ -84,7 +85,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="foods column">
                     <h2>Foods</h2>
-                    <select size={this.data.foods.length + 1} onChange={this.changeFood}>
+                    <select value={this.state.food} size={this.data.foods.length + 1} onChange={this.changeFood}>
                         {this.data.foods.map(function(food) {
                           return <option key={food.objectId}>{food.name}</option>
                         })}
@@ -93,7 +94,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="types column">
                     <h2>Types</h2>
-                    <select onChange={this.changeType} size={this.data.types.length + 1}>
+                    <select ref="types" defaultValue={this.state.type} value={this.state.type} onChange={this.changeType} size={this.data.types.length + 1}>
                         {this.data.types.map(function(type) {
                           return <option key={type.objectId} >{type.name}</option>
                         })}

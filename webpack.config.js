@@ -49,7 +49,6 @@ var common = {
         ];
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new HtmlwebpackPlugin({
             title: 'Pete Petrash'
         }),
