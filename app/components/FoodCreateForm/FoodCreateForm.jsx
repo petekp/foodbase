@@ -12,16 +12,16 @@ export default class FoodCreateForm extends ParseComponent {
     constructor(props) {
         super(props)
         this.state = {
-            food: null,
-            type: null,
-            location: null,
-            month: null
+            food: "Apples",
+            type: "Veggies",
+            location: "Alabama",
+            month: ["September"]
         }
     }
     observe(props, state) {
         return {
           months: new Parse.Query('Months'),
-          foods: new Parse.Query('Foods'),
+          foods: new Parse.Query('Foods').include('type'),
           locations: new Parse.Query('Locations'),
           types: new Parse.Query('Types'),
           seasonality: new Parse.Query('FLM')
@@ -33,9 +33,8 @@ export default class FoodCreateForm extends ParseComponent {
         let thisFood = foods.filter(food =>
             food.name == this.state.food
         )
-        this.state.type = thisFood[0].type.objectId
-        console.log(thisFood)
-
+        this.setState({type : thisFood[0].type.name})
+        console.log(this.state.type)
     }
     addFood = () => {
         let types = this.data.types
@@ -67,6 +66,12 @@ export default class FoodCreateForm extends ParseComponent {
     changeType = (e) => {
         this.state.type = e.target.value
     }
+    changeLocation = (e) => {
+        this.state.location = e.target.value
+    }
+    changeMonth = (e) => {
+        this.state.month = e.target.value
+    }
     showSeasonalFoods() {
         let seasonality = this.data.seasonality
         let inSeasonFoods = seasonality.filter(el =>
@@ -74,18 +79,22 @@ export default class FoodCreateForm extends ParseComponent {
         )
     }
     render() {
+        var food = this.state.food,
+            type = this.state.type,
+            location = this.state.location,
+            month = this.state.month
+
         return (
             <div className="FoodCreateForm">
                 <div className="actions">
                     <input ref="newFoodInput" type="text" defaultValue="" placeholder="Food" />
                     <button onClick={this.addFood} type="button">Add</button>
-
                     <button className="button--red" onClick={this.removeFood} type="button">Remove</button>
                 </div>
 
                 <div className="foods column">
                     <h2>Foods</h2>
-                    <select value={this.state.food} size={this.data.foods.length + 1} onChange={this.changeFood}>
+                    <select value={food} onChange={this.changeFood} size={this.data.foods.length + 1}>
                         {this.data.foods.map(function(food) {
                           return <option key={food.objectId}>{food.name}</option>
                         })}
@@ -94,7 +103,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="types column">
                     <h2>Types</h2>
-                    <select ref="types" defaultValue={this.state.type} value={this.state.type} onChange={this.changeType} size={this.data.types.length + 1}>
+                    <select value={type} onChange={this.changeType} size={this.data.types.length + 1}>
                         {this.data.types.map(function(type) {
                           return <option key={type.objectId} >{type.name}</option>
                         })}
@@ -103,7 +112,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="locations column">
                     <h2>Locations</h2>
-                    <select size={this.data.locations.length + 1}>
+                    <select value={"Alabama"} onChange={this.changeLocation} size={this.data.locations.length + 1}>
                         {this.data.locations.map(function(location) {
                           return <option key={location.objectId} >{location.name}</option>
                         })}
@@ -112,7 +121,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="months column">
                     <h2>Months</h2>
-                    <select multiple={true} size={this.data.months.length + 1}>
+                    <select value={month} multiple={true} onChange={this.changeMonth} size={this.data.months.length + 1}>
                         {this.data.months.map(function(month) {
                           return <option key={month.objectId} >{month.name}</option>
                         })}
