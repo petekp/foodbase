@@ -8,7 +8,6 @@ Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPe
 
 export default class FoodCreateForm extends ParseComponent {
     mixins: [ParseReact.Mixin]
-
     constructor(props) {
         super(props)
         this.state = {
@@ -26,15 +25,6 @@ export default class FoodCreateForm extends ParseComponent {
           types: new Parse.Query('Types'),
           seasonality: new Parse.Query('FLM')
         }
-    }
-    changeFood = (e) => {
-        this.state.food = e.target.value
-        let foods = this.data.foods
-        let thisFood = foods.filter(food =>
-            food.name == this.state.food
-        )
-        this.setState({type : thisFood[0].type.name})
-        console.log(this.state.type)
     }
     addFood = () => {
         let types = this.data.types
@@ -63,14 +53,26 @@ export default class FoodCreateForm extends ParseComponent {
         let id = selectedFoods[0]
         ParseReact.Mutation.Destroy(id).dispatch();
     }
-    changeType = (e) => {
-        this.state.type = e.target.value
+    changedFood = (e) => {
+        this.setState({food : e.target.value})
+
+        let foods = this.data.foods
+        let thisFood = foods.filter(food =>
+            food.name == this.state.food
+        )
+        this.setState({type : thisFood[0].type.name})
+        console.log('Changed Food to %s', this.state.food)
     }
-    changeLocation = (e) => {
-        this.state.location = e.target.value
+    changedType = (e) => {
+        this.setState({type : e.target.value})
+        console.log('Changed Type to %s', this.state.type)
     }
-    changeMonth = (e) => {
-        this.state.month = e.target.value
+    changedLocation = (e) => {
+        this.setState({location : e.target.value})
+        console.log('Changed Location to %s', this.state.location)
+    }
+    changedMonth = (e) => {
+        console.log(this.state.month)
     }
     showSeasonalFoods() {
         let seasonality = this.data.seasonality
@@ -94,7 +96,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="foods column">
                     <h2>Foods</h2>
-                    <select value={food} onChange={this.changeFood} size={this.data.foods.length + 1}>
+                    <select value={food} onChange={this.changedFood} size={this.data.foods.length + 1}>
                         {this.data.foods.map(function(food) {
                           return <option key={food.objectId}>{food.name}</option>
                         })}
@@ -103,7 +105,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="types column">
                     <h2>Types</h2>
-                    <select value={type} onChange={this.changeType} size={this.data.types.length + 1}>
+                    <select value={type} onChange={this.changedType} size={this.data.types.length + 1}>
                         {this.data.types.map(function(type) {
                           return <option key={type.objectId} >{type.name}</option>
                         })}
@@ -112,7 +114,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="locations column">
                     <h2>Locations</h2>
-                    <select value={"Alabama"} onChange={this.changeLocation} size={this.data.locations.length + 1}>
+                    <select value={location} onChange={this.changedLocation} size={this.data.locations.length + 1}>
                         {this.data.locations.map(function(location) {
                           return <option key={location.objectId} >{location.name}</option>
                         })}
@@ -121,7 +123,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="months column">
                     <h2>Months</h2>
-                    <select value={month} multiple={true} onChange={this.changeMonth} size={this.data.months.length + 1}>
+                    <select value={month} multiple={true} onChange={this.changedMonth} size={this.data.months.length + 1}>
                         {this.data.months.map(function(month) {
                           return <option key={month.objectId} >{month.name}</option>
                         })}
