@@ -61,18 +61,15 @@ export default class FoodCreateForm extends ParseComponent {
             food.name == this.state.food
         )
         this.setState({type : thisFood[0].type.name})
-        console.log('Changed Food to %s', this.state.food)
     }
     changedType = (e) => {
         this.setState({type : e.target.value})
-        console.log('Changed Type to %s', this.state.type)
     }
     changedLocation = (e) => {
         this.setState({location : e.target.value})
-        console.log('Changed Location to %s', this.state.location)
     }
     changedMonth = (e) => {
-        console.log(this.state.month)
+        this.setState({month : e.target.value})
     }
     showSeasonalFoods() {
         let seasonality = this.data.seasonality
@@ -91,7 +88,7 @@ export default class FoodCreateForm extends ParseComponent {
                 <div className="actions">
                     <input ref="newFoodInput" type="text" defaultValue="" placeholder="Food" />
                     <button onClick={this.addFood} type="button">Add</button>
-                    <button className="button--red" onClick={this.removeFood} type="button">Remove</button>
+                    <button className="button--warning" onClick={this.removeFood} type="button">Remove</button>
                 </div>
 
                 <div className="foods column">
@@ -123,7 +120,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                 <div className="months column">
                     <h2>Months</h2>
-                    <select value={month} multiple={true} onChange={this.changedMonth} size={this.data.months.length + 1}>
+                    <select value={month} onChange={this.changedMonth} size={this.data.months.length + 1}>
                         {this.data.months.map(function(month) {
                           return <option key={month.objectId} >{month.name}</option>
                         })}
