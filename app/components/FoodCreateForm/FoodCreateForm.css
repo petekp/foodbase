@@ -1,18 +1,22 @@
 .FoodCreateForm{
+    lost-column: 12/12;
     width: 100%;
     vertical-align: top;
     float: left;
     color: #888;
-    font-size: responsive 14px 18px;
-    lost-column: 12/12;
+    font-size: responsive 12px 18px;
     padding: 1rem;
+}
+
+section{
+    lost-utility: clearfix;
 }
 .column{
     lost-column: 3/12;
     float: left;
 }
 h2{
-    font-size: responsive 14px 20px;
+    font-size: responsive 12px 20px;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     color: #aaa;
@@ -23,6 +27,9 @@ h2{
 .actions{
     lost-column: 12/12;
 }
+.selections{
+    lost-column: 12/12;
+}
 
 input, select{
     appearance: none;
@@ -30,13 +37,13 @@ input, select{
 input{
     padding: 0 1rem;
     margin: 0 0 0.4rem;
-    font-size: responsive 14px 22px;
+    font-size: responsive 12px 22px;
     line-height: 2;
     vertical-align: top;
-    height: 3rem;
+    height: 2.5rem;
 }
 select{
-    font-size: responsive 15px 22px;
+    font-size: responsive 12px 22px;
     border: none;
     overflow: visible;
 
@@ -63,7 +70,7 @@ button{
     text-transform: uppercase;
     cursor: pointer;
     vertical-align: top;
-    height: 3rem;
+    height: 2.5rem;
 
     &:hover{
         background: #333;
@@ -72,7 +79,7 @@ button{
 .button--warning{
     @extend button;
     margin-left: 20px;
-    border: 2px solid red;
+    border: 1px solid red;
     color: red;
 
     &, &:hover{
