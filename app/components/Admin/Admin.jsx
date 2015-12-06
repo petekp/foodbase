@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import FoodCreateForm from '../FoodCreateForm/FoodCreateForm'
 
-var Admin = React.createClass( {
-    componentWillMount() {
-
-    },
+export default class Admin extends Component {
+    constructor(props) {
+        super(props)
+    }
     save() {
 
-    },
+    }
     render() {
         return (
           <div>
             <FoodCreateForm />
           </div>
-        );
+        )
       }
-})
-
-module.exports = Admin;
+}
