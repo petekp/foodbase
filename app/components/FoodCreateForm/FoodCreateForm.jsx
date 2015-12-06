@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import Parse from 'parse'
 import ParseReact from 'parse-react'
 import getUniqueArray from '../Helpers/getUniqueArray'
 import './FoodCreateForm.css'
 
-var ParseComponent = ParseReact.Component(React)
-Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPeayTt7gTyAP4iXnS7rpND8x')
-
-export default class FoodCreateForm extends ParseComponent {
-    mixins: [ParseReact.Mixin]
+export default class FoodCreateForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -19,17 +14,8 @@ export default class FoodCreateForm extends ParseComponent {
             seasonalFoods: []
         }
     }
-    observe(props, state) {
-        return {
-            types: new Parse.Query('Types'),
-            locations: new Parse.Query('Locations'),
-            months: new Parse.Query('Months'),
-            foods: new Parse.Query('Foods').include('type'),
-            FLM: new Parse.Query('FLM')
-        }
-    }
     addFood = () => {
-        let types = this.data.types
+        let types = this.props.data.types
         let selectedType = types.filter(type =>
             type.name == this.state.type
         )
@@ -47,23 +33,16 @@ export default class FoodCreateForm extends ParseComponent {
         this.refs.newFoodInput.value = ''
         this.refs.newFoodInput.focus()
     }
-    removeFood = (food) => {
-        let foods = this.data.foods
-        let selectedFoods = foods.filter(food =>
-            food.name == this.state.food
-        )
-        let id = selectedFoods[0]
-        ParseReact.Mutation.Destroy(id).dispatch();
-    }
+
     changedFood = (e) => {
         this.getSeasonalFoods()
 
-        let foods = this.data.foods
+        let foods = this.props.data.foods
         let thisFood = foods.filter(food =>
             food.name == this.state.food
         )
 
-        let FLM = this.data.FLM
+        let FLM = this.props.data.FLM
         let locations = FLM.filter(obj =>
             obj.food.name == e.target.value
         ).map((obj) => {
@@ -79,19 +58,19 @@ export default class FoodCreateForm extends ParseComponent {
 
 
     addNewRow = () => {
-        let foods = this.data.foods
+        let foods = this.props.data.foods
         let selectedFood = foods.filter(food =>
             food.name == this.state.food
         )
         let foodId = selectedFood[0].objectId
 
-        let locations = this.data.locations
+        let locations = this.props.data.locations
         let selectedLocation = locations.filter(location =>
             location.name == this.state.location
         )
         let locationId = selectedLocation[0].objectId
 
-        let months = this.data.months
+        let months = this.props.data.months
         let selectedMonth = months.filter(month =>
             month.name == this.state.months
         )
@@ -118,7 +97,7 @@ export default class FoodCreateForm extends ParseComponent {
 
 
     changedLocation = (e) => {
-        let FLM = this.data.FLM
+        let FLM = this.props.data.FLM
         let months = FLM.filter(obj =>
             obj.location.name == e.target.value
         ).map((obj) => {
@@ -131,7 +110,7 @@ export default class FoodCreateForm extends ParseComponent {
         this.setState({months : e.target.value})
     }
     getSeasonalFoods() {
-        let FLM = this.data.FLM
+        let FLM = this.props.data.FLM
         let seasonalFoods = FLM.filter(el =>
             el.month.name == this.state.months
         )
@@ -161,8 +140,8 @@ export default class FoodCreateForm extends ParseComponent {
                 <section>
                     <div className="types column">
                         <h2>Types</h2>
-                        <select value={type} onChange={this.changedType} size={this.data.types.length + 1}>
-                            {this.data.types.map(function(type) {
+                        <select value={type} onChange={this.changedType} size={this.props.data.types.length + 1}>
+                            {this.props.data.types.map(function(type) {
                               return <option key={type.objectId} >{type.name}</option>
                             })}
                         </select>
@@ -170,8 +149,8 @@ export default class FoodCreateForm extends ParseComponent {
 
                     <div className="foods column">
                         <h2>Foods</h2>
-                        <select value={food} onChange={this.changedFood} size={this.data.foods.length + 1}>
-                            {this.data.foods.map(function(food) {
+                        <select value={food} onChange={this.changedFood} size={this.props.data.foods.length + 1}>
+                            {this.props.data.foods.map(function(food) {
                               return <option key={food.objectId}>{food.name}</option>
                             })}
                         </select>
@@ -179,8 +158,8 @@ export default class FoodCreateForm extends ParseComponent {
 
                     <div className="locations column">
                         <h2>Locations</h2>
-                        <select value={location} onChange={this.changedLocation} multiple={true} size={this.data.locations.length + 1}>
-                            {this.data.locations.map(function(location) {
+                        <select value={location} onChange={this.changedLocation} multiple={true} size={this.props.data.locations.length + 1}>
+                            {this.props.data.locations.map(function(location) {
                               return <option key={location.objectId} >{location.name}</option>
                             })}
                         </select>
@@ -188,8 +167,8 @@ export default class FoodCreateForm extends ParseComponent {
 
                     <div className="months column">
                         <h2>Months</h2>
-                        <select value={months} multiple={true} onChange={this.changedMonth} size={this.data.months.length + 1}>
-                            {this.data.months.map(function(month) {
+                        <select value={months} multiple={true} onChange={this.changedMonth} size={this.props.data.months.length + 1}>
+                            {this.props.data.months.map(function(month) {
                               return <option key={month.objectId} >{month.name}</option>
                             })}
                         </select>
