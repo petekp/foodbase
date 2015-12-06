@@ -29,6 +29,9 @@ h2{
 }
 .selections{
     lost-column: 12/12;
+    text-align: right;
+    margin-bottom: 1rem;
+    font-size: responsive 12px 15px;
 }
 
 input, select{
@@ -88,4 +91,7 @@ button{
     &:hover{
         box-shadow: inset 0 0 0 0.1rem red;
     }
+}
+.button--right{
+    float: right;
 }

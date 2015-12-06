@@ -13,7 +13,7 @@ export default class FoodCreateForm extends ParseComponent {
         super(props)
         this.state = {
             type: "Veggies",
-            location: "Alabama",
+            location: [],
             months: [],
             food: "Apples",
             seasonalFoods: []
@@ -57,17 +57,66 @@ export default class FoodCreateForm extends ParseComponent {
     }
     changedFood = (e) => {
         this.getSeasonalFoods()
-        this.setState({food : e.target.value})
 
         let foods = this.data.foods
         let thisFood = foods.filter(food =>
             food.name == this.state.food
         )
-        this.setState({type : thisFood[0].type.name})
+
+        let FLM = this.data.FLM
+        let locations = FLM.filter(obj =>
+            obj.food.name == e.target.value
+        ).map((obj) => {
+            return obj.location.name
+        })
+        let uniqueLocations = getUniqueArray(locations);
+        this.setState({food : e.target.value, location : uniqueLocations, type : thisFood[0].type.name})
+        console.log(uniqueLocations)
     }
     changedType = (e) => {
         this.setState({type : e.target.value})
     }
+
+
+    addNewRow = () => {
+        let foods = this.data.foods
+        let selectedFood = foods.filter(food =>
+            food.name == this.state.food
+        )
+        let foodId = selectedFood[0].objectId
+
+        let locations = this.data.locations
+        let selectedLocation = locations.filter(location =>
+            location.name == this.state.location
+        )
+        let locationId = selectedLocation[0].objectId
+
+        let months = this.data.months
+        let selectedMonth = months.filter(month =>
+            month.name == this.state.months
+        )
+        let monthId = selectedMonth[0].objectId
+
+        ParseReact.Mutation.Create('FLM', {
+            food: {
+                __type: "Pointer",
+                className: "Foods",
+                objectId: foodId
+            },
+            location: {
+                __type: "Pointer",
+                className: "Locations",
+                objectId: locationId
+            },
+            month: {
+                __type: "Pointer",
+                className: "Months",
+                objectId: monthId
+            }
+        }).dispatch()
+    }
+
+
     changedLocation = (e) => {
         let FLM = this.data.FLM
         let months = FLM.filter(obj =>
@@ -101,8 +150,13 @@ export default class FoodCreateForm extends ParseComponent {
                         <input ref="newFoodInput" type="text" defaultValue="" placeholder="Food" />
                         <button onClick={this.addFood} type="button">Add</button>
                         <button className="button--warning" onClick={this.removeFood} type="button">Remove</button>
+                        <button className="button--right" onClick={this.addNewRow} type="button">[+]  Store Relationship</button>
                     </div>
-
+                </section>
+                <section>
+                    <div className="selections">
+                        ↳ [ {this.state.food}, {this.state.location},  {this.state.months} ]
+                    </div>
                 </section>
                 <section>
                     <div className="types column">
@@ -125,7 +179,7 @@ export default class FoodCreateForm extends ParseComponent {
 
                     <div className="locations column">
                         <h2>Locations</h2>
-                        <select value={location} onChange={this.changedLocation} size={this.data.locations.length + 1}>
+                        <select value={location} onChange={this.changedLocation} multiple={true} size={this.data.locations.length + 1}>
                             {this.data.locations.map(function(location) {
                               return <option key={location.objectId} >{location.name}</option>
                             })}
@@ -142,13 +196,6 @@ export default class FoodCreateForm extends ParseComponent {
                     </div>
 
 
-                </section>
-                <section>
-                    <div className="selections">
-                        {this.state.type} • {this.state.food} •  {this.state.location} •  {this.state.months} •  {this.state.seasonalFoods.map(function(food) {
-                          return <div>{food.food.name}</div>
-                        })}
-                    </div>
                 </section>
             </div>
         )
