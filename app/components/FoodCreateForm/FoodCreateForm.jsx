@@ -11,22 +11,26 @@ export default class FoodCreateForm extends Component {
             food: [],
             location: [],
             months: [],
+            selectedMonths: [],
             seasonalFoods: []
         }
     }
+    getObjectId = (table, key) => {
+        return this.props.data[table].filter(obj =>
+            obj.name == key
+        ).map((obj) => {
+            return obj.objectId
+        }).toString()
+    }
     addFood = () => {
-        let types = this.props.data.types
-        let selectedType = types.filter(type =>
-            type.name == this.state.type
-        )
-        let typeId = selectedType[0].objectId
+        let foodId = this.getObjectId('foods', this.refs.newFoodInput.value)
 
         ParseReact.Mutation.Create('Foods', {
           name: this.refs.newFoodInput.value,
           type: {
               __type: "Pointer",
               className: "Types",
-              objectId: typeId
+              objectId: foodId
           }
         }).dispatch();
 
@@ -36,42 +40,26 @@ export default class FoodCreateForm extends Component {
     changedType = (e) => {
         this.setState({type : e.target.value})
     }
-
-
-    addNewRow = () => {
-        let foods = this.props.data.foods
-        let selectedFood = foods.filter(food =>
-            food.name == this.state.food
-        )
-        let foodId = selectedFood[0].objectId
-
-        let locations = this.props.data.locations
-        let selectedLocation = locations.filter(location =>
-            location.name == this.state.location
-        )
-        let locationId = selectedLocation[0].objectId
-
-        let months = this.props.data.months
-        let selectedMonth = months.filter(month =>
-            month.name == this.state.months
-        )
-        let monthId = selectedMonth[0].objectId
+    addNewRelation = () => {
+        let foods = this.state.food
+        let locations = this.state.location
+        let months = this.state.months
 
         ParseReact.Mutation.Create('FLM', {
             food: {
                 __type: "Pointer",
                 className: "Foods",
-                objectId: foodId
+                objectId: foods
             },
             location: {
                 __type: "Pointer",
                 className: "Locations",
-                objectId: locationId
+                objectId: location
             },
             month: {
                 __type: "Pointer",
                 className: "Months",
-                objectId: monthId
+                objectId: months
             }
         }).dispatch()
     }
@@ -87,26 +75,23 @@ export default class FoodCreateForm extends Component {
         return getUniqueArray(relations)
     }
     changedFood = (e) => {
+        let foodId = this.getObjectId('foods', e.target.value)
+        console.log(foodId)
+
         let months = this.getRelations(e.target.value, 'food', 'month')
         let locations = this.getRelations(e.target.value, 'food', 'location')
-
-        console.log(locations, months)
 
         this.setState({food : [e.target.value], months : months, location : locations})
     }
     changedLocation = (e) => {
         let months = this.getRelations(e.target.value, 'location', 'month')
-        let foods = this.getRelations(e.target.value, 'location', 'food')
 
-        console.log(foods, months)
-
-        this.setState({location : [e.target.value], months : months, food : foods})
+        this.setState({location : [e.target.value], months : months})
     }
     changedMonth = (e) => {
-        let foods = this.getRelations(e.target.value, 'month', 'food')
-        let locations = this.getRelations(e.target.value, 'month', 'location')
-
-        this.setState({months : [e.target.value], food : foods, location : locations})
+        let currentMonths = this.state.months
+        let selectedMonths = currentMonths.push(e.target.value)
+        this.setState({selectedMonths : selectedMonths})
     }
     getSeasonalFoods() {
         let FLM = this.props.data.FLM
@@ -116,7 +101,6 @@ export default class FoodCreateForm extends Component {
         this.setState({seasonalFoods : seasonalFoods})
     }
     render() {
-
         var food = this.state.food,
             type = this.state.type,
             location = this.state.location,
@@ -129,7 +113,7 @@ export default class FoodCreateForm extends Component {
                         <input ref="newFoodInput" type="text" defaultValue="" placeholder="Food" />
                         <button onClick={this.addFood} type="button">Add</button>
                         <button className="button--warning" onClick={this.removeFood} type="button">Remove</button>
-                        <button className="button--right" onClick={this.addNewRow} type="button">[+]  Store Relationship</button>
+                        <button className="button--right" onClick={this.addNewRelation} type="button">[+]  Store Relationship</button>
                     </div>
                 </section>
                 <section>
