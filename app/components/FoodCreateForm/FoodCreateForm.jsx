@@ -41,25 +41,25 @@ export default class FoodCreateForm extends Component {
         this.setState({type : e.target.value})
     }
     addNewRelation = () => {
-        let foods = this.state.food
-        let locations = this.state.location
-        let months = this.state.months
+        let foodId = this.getObjectId('foods', this.state.food)
+        let locationId = this.getObjectId('locations', this.state.location)
+        let monthId = this.getObjectId('months', this.state.months)
 
         ParseReact.Mutation.Create('FLM', {
             food: {
                 __type: "Pointer",
                 className: "Foods",
-                objectId: foods
+                objectId: foodId
             },
             location: {
                 __type: "Pointer",
                 className: "Locations",
-                objectId: location
+                objectId: locationId
             },
             month: {
                 __type: "Pointer",
                 className: "Months",
-                objectId: months
+                objectId: monthId
             }
         }).dispatch()
     }
