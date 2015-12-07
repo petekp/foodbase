@@ -11,6 +11,7 @@ export default class Admin extends ParseComponent {
     mixins: [ParseReact.Mixin]
     constructor(props) {
         super(props)
+
     }
     observe(props, state) {
         return {

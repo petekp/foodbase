@@ -7,10 +7,10 @@ export default class FoodCreateForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            type: "Veggies",
+            type: "Fruits",
+            food: [],
             location: [],
             months: [],
-            food: "Apples",
             seasonalFoods: []
         }
     }
@@ -32,25 +32,6 @@ export default class FoodCreateForm extends Component {
 
         this.refs.newFoodInput.value = ''
         this.refs.newFoodInput.focus()
-    }
-
-    changedFood = (e) => {
-        this.getSeasonalFoods()
-
-        let foods = this.props.data.foods
-        let thisFood = foods.filter(food =>
-            food.name == this.state.food
-        )
-
-        let FLM = this.props.data.FLM
-        let locations = FLM.filter(obj =>
-            obj.food.name == e.target.value
-        ).map((obj) => {
-            return obj.location.name
-        })
-        let uniqueLocations = getUniqueArray(locations);
-        this.setState({food : e.target.value, location : uniqueLocations, type : thisFood[0].type.name})
-        console.log(uniqueLocations)
     }
     changedType = (e) => {
         this.setState({type : e.target.value})
@@ -95,19 +76,37 @@ export default class FoodCreateForm extends Component {
         }).dispatch()
     }
 
-
-    changedLocation = (e) => {
+    getRelations = (targetValue, key, relation) => {
         let FLM = this.props.data.FLM
-        let months = FLM.filter(obj =>
-            obj.location.name == e.target.value
+
+        let relations = FLM.filter(obj =>
+            obj[key].name == targetValue
         ).map((obj) => {
-            return obj.month.name
+            return obj[relation].name
         })
-        let uniqueMonths = getUniqueArray(months);
-        this.setState({location : e.target.value, months : uniqueMonths})
+        return getUniqueArray(relations)
+    }
+    changedFood = (e) => {
+        let months = this.getRelations(e.target.value, 'food', 'month')
+        let locations = this.getRelations(e.target.value, 'food', 'location')
+
+        console.log(locations, months)
+
+        this.setState({food : [e.target.value], months : months, location : locations})
+    }
+    changedLocation = (e) => {
+        let months = this.getRelations(e.target.value, 'location', 'month')
+        let foods = this.getRelations(e.target.value, 'location', 'food')
+
+        console.log(foods, months)
+
+        this.setState({location : [e.target.value], months : months, food : foods})
     }
     changedMonth = (e) => {
-        this.setState({months : e.target.value})
+        let foods = this.getRelations(e.target.value, 'month', 'food')
+        let locations = this.getRelations(e.target.value, 'month', 'location')
+
+        this.setState({months : [e.target.value], food : foods, location : locations})
     }
     getSeasonalFoods() {
         let FLM = this.props.data.FLM
@@ -117,6 +116,7 @@ export default class FoodCreateForm extends Component {
         this.setState({seasonalFoods : seasonalFoods})
     }
     render() {
+
         var food = this.state.food,
             type = this.state.type,
             location = this.state.location,
@@ -149,7 +149,7 @@ export default class FoodCreateForm extends Component {
 
                     <div className="foods column">
                         <h2>Foods</h2>
-                        <select value={food} onChange={this.changedFood} size={this.props.data.foods.length + 1}>
+                        <select value={food} onChange={this.changedFood} multiple={true} size={this.props.data.foods.length + 1}>
                             {this.props.data.foods.map(function(food) {
                               return <option key={food.objectId}>{food.name}</option>
                             })}
