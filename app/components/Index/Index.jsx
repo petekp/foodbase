@@ -6,10 +6,10 @@ import $ from 'jQuery'
 
 export default class Index extends Component {
     componentWillMount() {
-        this.loadFoodsFromServer()
-        setInterval((e) => this.loadFoodsFromServer, 2000)
+        this.loadFoodsJSON()
+        setInterval((e) => this.loadFoodsJSON, 2000)
     }
-    loadFoodsFromServer() {
+    loadFoodsJSON() {
         $.ajax({
             url: 'foods.json',
             dataType: 'json',

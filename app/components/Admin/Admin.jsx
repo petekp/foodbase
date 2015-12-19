@@ -13,7 +13,7 @@ export default class Admin extends ParseComponent {
         super(props)
 
     }
-    observe(props, state) {
+    observe() {
         return {
             types: new Parse.Query('Types'),
             locations: new Parse.Query('Locations'),

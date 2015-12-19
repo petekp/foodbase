@@ -11,7 +11,11 @@ export default class FoodFilterForm extends ParseComponent {
 
     constructor(props) {
         super(props)
-        this.state = {type: null, time:null, location: null}
+        this.state = {
+            type: null,
+            time:null,
+            location: null
+        }
         this.typeChange = this.typeChange.bind(this)
         this.locationChange = this.locationChange.bind(this)
         this.timeChange = this.timeChange.bind(this)
@@ -22,29 +26,18 @@ export default class FoodFilterForm extends ParseComponent {
           foods: new Parse.Query('Foods'),
           locations: new Parse.Query('Locations'),
           types: new Parse.Query('Types'),
-          seasonality: new Parse.Query('FLM')
         }
     }
-    showSeasonalFoods () {
-        let flmQuery = new Parse.Query("FLM")
-        let seasonality = this.data.seasonality
-        let inSeasonFoods = seasonality.filter(el =>
-            el.month.name == "May"
-        )
-        inSeasonFoods.forEach(i => {
-            // console.log(i.food.name)
-        })
-    }
-    typeChange(event) {
-        this.state.type = event.target.value
+    typeChange(e) {
+        this.state.type = e.target.value
         console.log(this.state.type)
     }
-    timeChange(event) {
-        this.state.time = event.target.value
+    timeChange(e) {
+        this.state.time = e.target.value
         console.log(this.state.time)
     }
-    locationChange(event) {
-        this.state.location = event.target.value
+    locationChange(e) {
+        this.state.location = e.target.value
         console.log(this.state.location)
     }
     render() {
@@ -67,9 +60,6 @@ export default class FoodFilterForm extends ParseComponent {
                     {this.data.locations.map(function(location) {
                       return <option key={location.objectId}>{location.name}</option>
                     })}
-                </select>
-                <select>
-                    <option>{this.showSeasonalFoods()}</option>
                 </select>
             </div>
         )

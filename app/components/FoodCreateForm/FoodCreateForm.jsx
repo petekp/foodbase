@@ -75,11 +75,9 @@ export default class FoodCreateForm extends Component {
         return getUniqueArray(relations)
     }
     changedFood = (e) => {
-        let foodId = this.getObjectId('foods', e.target.value)
-        console.log(foodId)
-
-        let months = this.getRelations(e.target.value, 'food', 'month')
-        let locations = this.getRelations(e.target.value, 'food', 'location')
+        let foodId = this.getObjectId('foods', e.target.value),
+            months = this.getRelations(e.target.value, 'food', 'month'),
+            locations = this.getRelations(e.target.value, 'food', 'location')
 
         this.setState({food : [e.target.value], months : months, location : locations})
     }
