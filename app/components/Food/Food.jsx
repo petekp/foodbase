@@ -14,8 +14,9 @@ export default class Food extends Component {
         let deltaX          = 0,
             deltaY          = 0,
             scale           = 4,
-            $windowCenterX  = $(window).width() / 2,
-            $windowCenterY  = $(window).height() / 2 + $(window).scrollTop(),
+            $window         = $(window),
+            $windowCenterX  = $window.width() / 2,
+            $windowCenterY  = $window.height() / 2 + $window.scrollTop(),
             $el             = $(ReactDOM.findDOMNode(this)),
             $elOffset       = $el.offset(),
             $elCenterX      = $elOffset.left + $el.outerWidth()/2,
@@ -27,7 +28,7 @@ export default class Food extends Component {
         deltaY = $elParentOffset.top + ($windowCenterY - ($elCenterY * scale))
 
         if (this.state.isSelected) {
-            $elParent.css('transform', `translate(0px,0px) scale(1)`)
+            $elParent.css('transform', `translate(0,0) scale(1)`)
         } else{
             $elParent.css(`transform`, `translate(${deltaX}px,${deltaY}px) scale(${scale})`)
         }
