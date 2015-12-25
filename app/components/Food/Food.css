@@ -25,7 +25,9 @@
         }
         .foodPhoto{
             opacity: 0.65;
-            transition: transform 4s ease-out, opacity 1s cubic-bezier(0.250, 0.250, 0.000, 0.990);
+            transition: 
+                transform 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990),
+                opacity 0.8s cubic-bezier(0.250, 0.250, 0.000, 0.990);
             transform: scale(1);
         }
     }
