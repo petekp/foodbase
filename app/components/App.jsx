@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { TransitionMotion, spring } from 'react-motion'
-import range from 'lodash/utility/range'
 import RouteTransition from './RouteTransition'
 import $ from 'jQuery'
+
 import Parse from 'parse'
 import ParseReact from 'parse-react'
 
