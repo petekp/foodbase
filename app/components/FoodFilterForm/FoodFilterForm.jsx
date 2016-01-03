@@ -8,14 +8,10 @@ Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPe
 
 export default class FoodFilterForm extends ParseComponent {
     mixins: [ParseReact.Mixin]
-
     constructor(props) {
         super(props)
-        this.state = {
-            type: null,
-            time:null,
-            location: null
-        }
+    }
+    componentDidMount() {
         this.typeChange = this.typeChange.bind(this)
         this.locationChange = this.locationChange.bind(this)
         this.timeChange = this.timeChange.bind(this)
@@ -29,16 +25,19 @@ export default class FoodFilterForm extends ParseComponent {
         }
     }
     typeChange(e) {
-        this.state.type = e.target.value
-        console.log(this.state.type)
+        this.setState({
+            type: e.target.value
+        })
     }
     timeChange(e) {
-        this.state.time = e.target.value
-        console.log(this.state.time)
+        this.setState({
+            time: e.target.value
+        })
     }
     locationChange(e) {
-        this.state.location = e.target.value
-        console.log(this.state.location)
+        this.setState({
+            location: e.target.value
+        })
     }
     render() {
         return (

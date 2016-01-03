@@ -6,6 +6,8 @@ import './FoodCreateForm.css'
 export default class FoodCreateForm extends Component {
     constructor(props) {
         super(props)
+    }
+    componentWillMount() {
         this.state = {
             type: "Fruits",
             food: [],

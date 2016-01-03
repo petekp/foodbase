@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import NavPrimary from '../NavPrimary/NavPrimary'
 import FoodList from '../FoodList/FoodList'
 import $ from 'jQuery'
-// import SpringText from '../Helpers/SpringText'
 
 export default class Index extends Component {
+    constructor(props){
+        super(props)
+    }
     componentWillMount() {
         this.loadFoodsJSON()
-        setInterval((e) => this.loadFoodsJSON, 2000)
     }
     loadFoodsJSON() {
         $.ajax({

@@ -6,6 +6,8 @@ export default class FoodList extends Component {
 
     constructor(props) {
         super(props)
+    }
+    componentWillMount() {
         this.state = { }
         this.state.foodNodes = sortByKey(this.props.foods, "name").map( (food, i) => {
             return (
