@@ -15,7 +15,7 @@ document.body.appendChild(app)
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Index} />
+      <IndexRoute component={Index} source="foods.json" />
       <Route path="admin" component={Admin} />
       <Route path="^" component={NotFound404} />
     </Route>

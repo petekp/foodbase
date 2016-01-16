@@ -6,11 +6,9 @@ import $ from 'jQuery'
 export default class Index extends Component {
     constructor(props){
         super(props)
+        this.state = { data: [] }
     }
-    componentWillMount() {
-        this.loadFoodsJSON()
-    }
-    loadFoodsJSON() {
+    componentDidMount() {
         $.ajax({
             url: 'foods.json',
             dataType: 'json',
@@ -24,10 +22,11 @@ export default class Index extends Component {
         })
     }
     render() {
+        console.log("index state:", this.state)
         return(
             <div>
                 <NavPrimary />
-                <FoodList foods={this.state.data} />
+                <FoodList data={this.state.data} />
             </div>
         )
     }
