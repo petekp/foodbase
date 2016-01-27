@@ -6,9 +6,6 @@ import './Food.css'
 export default class Food extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            foodNodes: ''
-        }
     }
     componentDidMount() {
         this.setState({isSelected: false})
