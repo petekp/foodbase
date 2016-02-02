@@ -53,7 +53,7 @@ export default class Index extends ParseComponent {
     render() {
         return (
             <div>
-                {/* <NavPrimary/> */}
+                <NavPrimary data={this.data}/>
                 <FoodList data={this.data}/>
             </div>
         )
