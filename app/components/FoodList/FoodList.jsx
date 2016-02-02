@@ -3,11 +3,10 @@ import Food from '../Food/Food'
 import sortByKey from '../Helpers/sortByKey'
 
 export default class FoodList extends Component {
-    constructor(props) {
+    constructor(state, props) {
         super(props)
-        this.state = {
-            foodNodes: ''
-        }
+
+        console.log(this.state)
     }
     componentWillReceiveProps(nextProps) {
         let foodNodes = nextProps.data.FLM.map((obj, i) => {

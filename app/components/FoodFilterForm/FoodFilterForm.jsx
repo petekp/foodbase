@@ -19,19 +19,21 @@ export default class FoodFilterForm extends Component {
         this.setState({
             type: e.target.value
         })
+        console.log('You picked ' + e.target.value)
     }
     timeChange(e) {
         this.setState({
             time: e.target.value
         })
+        console.log('You picked ' + e.target.value)
     }
     locationChange(e) {
         this.setState({
             location: e.target.value
         })
+        console.log('You picked ' + e.target.value)
     }
     render() {
-      console.log(this.props.data)
         return (
             <div className="FoodFilterForm">
                 Show me

@@ -16,10 +16,10 @@ export default class Index extends ParseComponent {
     constructor(props) {
         super(props)
         this.state = {
-            type: "Fruits",
+            type: "Veggies",
             food: [],
             location: [],
-            months: [],
+            months: ["May"],
             selectedMonths: [],
             seasonalFoods: []
         }
@@ -44,6 +44,7 @@ export default class Index extends ParseComponent {
         return getUniqueArray(relations)
     }
     getSeasonalFoods() {
+      console.log(this.state.months)
         let FLM = this.props.data.FLM
         let seasonalFoods = FLM.filter(el =>
             el.month.name == this.state.months
