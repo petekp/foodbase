@@ -14,6 +14,7 @@ export default class FoodFilterForm extends Component {
         this.typeChange = this.typeChange.bind(this)
         this.locationChange = this.locationChange.bind(this)
         this.timeChange = this.timeChange.bind(this)
+        this.props.updateFilters()
     }
     typeChange(e) {
         this.setState({

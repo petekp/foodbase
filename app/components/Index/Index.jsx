@@ -51,10 +51,13 @@ export default class Index extends ParseComponent {
         )
         this.setState({seasonalFoods : seasonalFoods})
     }
+    updateFilters() {
+      console.log('helloooooskjdfkajsdhfkasjdhfkasdhfkasjdhfkkjkjj ')
+    }
     render() {
         return (
             <div>
-                <NavPrimary data={this.data}/>
+                <NavPrimary data={this.data} updateFilters={this.updateFilters}/>
                 <FoodList data={this.data}/>
             </div>
         )

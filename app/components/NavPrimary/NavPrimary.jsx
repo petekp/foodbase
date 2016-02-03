@@ -9,7 +9,7 @@ export default class NavPrimary extends Component {
         return (
             <div className="NavPrimary">
                 <span className="AppTitle">Foodbase</span>
-                <FoodFilterForm data={this.props.data}/>
+                <FoodFilterForm ref="foodFilterForm" updateFilters={this.props.updateFilters} data={this.props.data}/>
             </div>
         )
     }

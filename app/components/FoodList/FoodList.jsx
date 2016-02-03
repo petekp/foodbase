@@ -5,8 +5,12 @@ import sortByKey from '../Helpers/sortByKey'
 export default class FoodList extends Component {
     constructor(state, props) {
         super(props)
-
-        console.log(this.state)
+        this.state = {
+            foodNodes: '',
+            type: '',
+            month: '',
+            location: ''
+        }
     }
     componentWillReceiveProps(nextProps) {
         let foodNodes = nextProps.data.FLM.map((obj, i) => {
