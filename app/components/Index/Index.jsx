@@ -13,7 +13,7 @@ Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPe
 
 export default class Index extends ParseComponent {
     mixins : [ParseReact.Mixin]
-    constructor(props) {
+    constructor(props, context) {
         super(props)
         this.state = {
             type: "Veggies",
@@ -51,13 +51,13 @@ export default class Index extends ParseComponent {
         )
         this.setState({seasonalFoods : seasonalFoods})
     }
-    updateFilters() {
-      console.log('helloooooskjdfkajsdhfkasjdhfkasdhfkasjdhfkkjkjj ')
+    changeFilter(filterState) {
+      console.log(filterState)
     }
     render() {
         return (
             <div>
-                <NavPrimary data={this.data} updateFilters={this.updateFilters}/>
+                <NavPrimary data={this.data} changeFilter={this.changeFilter}/>
                 <FoodList data={this.data}/>
             </div>
         )

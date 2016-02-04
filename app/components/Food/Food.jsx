@@ -4,7 +4,7 @@ import $ from 'jQuery'
 import './Food.css'
 
 export default class Food extends Component {
-    constructor(props) {
+    constructor(props, context) {
         super(props)
     }
     componentDidMount() {

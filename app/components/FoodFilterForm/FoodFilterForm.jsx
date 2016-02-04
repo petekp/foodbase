@@ -5,40 +5,51 @@ export default class FoodFilterForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          type: null,
-          time: null,
-          location: null
+          type: '',
+          month: '',
+          location: ''
         }
+    }
+    componentWillMount() {
+
     }
     componentDidMount() {
         this.typeChange = this.typeChange.bind(this)
         this.locationChange = this.locationChange.bind(this)
         this.timeChange = this.timeChange.bind(this)
-        this.props.updateFilters()
+    }
+    componentWillReceiveProps(nextProps) {
+      this.state = {}
+      let newState = {
+        type: nextProps.data.types[1].name,
+        month: nextProps.data.months[1].name,
+        location: nextProps.data.locations[1].name
+      }
+      this.setState(newState)
+    }
+    componentWillUpdate(nextProps, nextState) {
+      nextProps.changeFilter(nextState)
     }
     typeChange(e) {
         this.setState({
             type: e.target.value
         })
-        console.log('You picked ' + e.target.value)
     }
     timeChange(e) {
         this.setState({
             time: e.target.value
         })
-        console.log('You picked ' + e.target.value)
     }
     locationChange(e) {
         this.setState({
             location: e.target.value
         })
-        console.log('You picked ' + e.target.value)
     }
     render() {
         return (
             <div className="FoodFilterForm">
                 Show me
-                <select onChange={this.typeChange}>
+                <select ref="typeSelect" onChange={this.typeChange}>
                     {this.props.data.types.map(function(type) {
                       return <option key={type.objectId}>{type.name}</option>
                     })}
