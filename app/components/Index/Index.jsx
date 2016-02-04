@@ -24,6 +24,9 @@ export default class Index extends ParseComponent {
             seasonalFoods: []
         }
     }
+    componentDidMount() {
+        this.changeFilter = this.changeFilter.bind(this)
+    }
     observe() {
         return {
           months: new Parse.Query('Months'),
@@ -43,16 +46,19 @@ export default class Index extends ParseComponent {
         })
         return getUniqueArray(relations)
     }
-    getSeasonalFoods() {
-      console.log(this.state.months)
-        let FLM = this.props.data.FLM
-        let seasonalFoods = FLM.filter(el =>
-            el.month.name == this.state.months
-        )
-        this.setState({seasonalFoods : seasonalFoods})
+    // getSeasonalFoods() {
+    //     let FLM = this.props.data.FLM
+    //     let seasonalFoods = FLM.filter(el =>
+    //         el.type.name == this.state.type
+    //     )
+    //     console.log('hello')
+    //     this.setState({seasonalFoods : seasonalFoods})
+    // }
+    componentDidUpdate() {
+      console.log('index update')
     }
     changeFilter(filterState) {
-      console.log(filterState)
+      // console.log(filterState)
     }
     render() {
         return (

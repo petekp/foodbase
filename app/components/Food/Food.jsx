@@ -33,12 +33,15 @@ export default class Food extends Component {
             $elParent.css(`transform`, `translate(${deltaX}px,${deltaY}px) scale(${scale})`)
         }
     }
+    componentWillReceiveProps(nextProps, nextState) {
+      console.log('food received props')
+    }
     handleClick(e) {
         this.setState({
             isSelected: !this.state.isSelected
         })
         if (!this.state.isSelected) {
-            console.log(this.props.name)
+
         }
         this.zoom()
     }

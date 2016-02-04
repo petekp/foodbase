@@ -16,7 +16,7 @@ export default class FoodFilterForm extends Component {
     componentDidMount() {
         this.typeChange = this.typeChange.bind(this)
         this.locationChange = this.locationChange.bind(this)
-        this.timeChange = this.timeChange.bind(this)
+        this.monthChange = this.monthChange.bind(this)
     }
     componentWillReceiveProps(nextProps) {
       this.state = {}
@@ -35,9 +35,9 @@ export default class FoodFilterForm extends Component {
             type: e.target.value
         })
     }
-    timeChange(e) {
+    monthChange(e) {
         this.setState({
-            time: e.target.value
+            month: e.target.value
         })
     }
     locationChange(e) {
@@ -49,13 +49,13 @@ export default class FoodFilterForm extends Component {
         return (
             <div className="FoodFilterForm">
                 Show me
-                <select ref="typeSelect" onChange={this.typeChange}>
+                <select onChange={this.typeChange}>
                     {this.props.data.types.map(function(type) {
                       return <option key={type.objectId}>{type.name}</option>
                     })}
                 </select>
                 in season
-                <select onChange={this.timeChange}>
+                <select onChange={this.monthChange}>
                     {this.props.data.months.map(function(month) {
                       return <option key={month.objectId}>{month.name}</option>
                     })}

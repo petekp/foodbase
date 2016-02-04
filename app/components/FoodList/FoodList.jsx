@@ -23,6 +23,9 @@ export default class FoodList extends Component {
         })
         this.setState({foodNodes: foodNodes})
     }
+    componentWillUpdate(nextProps, nextState) {
+      console.log(nextState)
+    }
     render() {
         return (
             <div className="FoodList">
