@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import NavPrimary from '../NavPrimary/NavPrimary'
-import FoodList from '../FoodList/FoodList'
+import FoodList from '../FoodList/FoodListSimple'
 import $ from 'jQuery'
 
 import getUniqueArray from '../Helpers/getUniqueArray'
@@ -19,9 +19,7 @@ export default class Index extends ParseComponent {
             type: "Veggies",
             food: [],
             location: [],
-            months: ["May"],
-            selectedMonths: [],
-            seasonalFoods: []
+            filteredFoods: []
         }
     }
     componentDidMount() {
@@ -29,11 +27,7 @@ export default class Index extends ParseComponent {
     }
     observe() {
         return {
-          months: new Parse.Query('Months'),
-          foods: new Parse.Query('Foods'),
-          locations: new Parse.Query('Locations'),
-          types: new Parse.Query('Types'),
-          FLM: new Parse.Query('FLM')
+          FLM: new Parse.Query('FLM').include(['food', 'location','month'])
         }
     }
     getRelations = (targetValue, key, relation) => {
@@ -61,10 +55,11 @@ export default class Index extends ParseComponent {
       // console.log(filterState)
     }
     render() {
+      console.log(this.data.FLM)
         return (
             <div>
-                <NavPrimary data={this.data} changeFilter={this.changeFilter}/>
-                <FoodList data={this.data}/>
+                {/*<NavPrimary data={this.data} changeFilter={this.changeFilter}/> */}
+                <FoodList foods={this.data.FLM}/>
             </div>
         )
     }

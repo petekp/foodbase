@@ -10,9 +10,6 @@ export default class FoodFilterForm extends Component {
           location: ''
         }
     }
-    componentWillMount() {
-
-    }
     componentDidMount() {
         this.typeChange = this.typeChange.bind(this)
         this.locationChange = this.locationChange.bind(this)
@@ -21,9 +18,9 @@ export default class FoodFilterForm extends Component {
     componentWillReceiveProps(nextProps) {
       this.state = {}
       let newState = {
-        type: nextProps.data.types[1].name,
-        month: nextProps.data.months[1].name,
-        location: nextProps.data.locations[1].name
+        type: nextProps.data.FLM[1].type.name,
+        month: nextProps.data.FLM[1].month.name,
+        location: nextProps.data.FLM[1].location.name
       }
       this.setState(newState)
     }
@@ -50,20 +47,20 @@ export default class FoodFilterForm extends Component {
             <div className="FoodFilterForm">
                 Show me
                 <select onChange={this.typeChange}>
-                    {this.props.data.types.map(function(type) {
-                      return <option key={type.objectId}>{type.name}</option>
+                    {this.props.data.FLM.map(function(food) {
+                      return <option key={food.objectId}>{food.name}</option>
                     })}
                 </select>
                 in season
                 <select onChange={this.monthChange}>
-                    {this.props.data.months.map(function(month) {
-                      return <option key={month.objectId}>{month.name}</option>
+                    {this.props.data.FLM.map(function(food) {
+                      return <option key={food.objectId}>{food.month.name}</option>
                     })}
                 </select>
                 within
                 <select onChange={this.locationChange}>
-                    {this.props.data.locations.map(function(location) {
-                      return <option key={location.objectId}>{location.name}</option>
+                    {this.props.data.FLM.map(function(food) {
+                      return <option key={food.objectId}>{food.location.name}</option>
                     })}
                 </select>
             </div>
