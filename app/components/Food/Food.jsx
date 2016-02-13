@@ -4,7 +4,7 @@ import $ from 'jQuery'
 import './Food.css'
 
 export default class Food extends Component {
-    constructor(props, context) {
+    constructor(props) {
         super(props)
     }
     componentDidMount() {
@@ -34,7 +34,7 @@ export default class Food extends Component {
         }
     }
     componentWillReceiveProps(nextProps, nextState) {
-      console.log('food received props')
+      // console.log('food received props')
     }
     handleClick(e) {
         this.setState({

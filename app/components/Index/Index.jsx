@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Children} from 'react'
 import NavPrimary from '../NavPrimary/NavPrimary'
 import FoodList from '../FoodList/FoodListSimple'
 import $ from 'jQuery'
@@ -13,54 +13,47 @@ Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPe
 
 export default class Index extends ParseComponent {
     mixins : [ParseReact.Mixin]
-    constructor(props, context) {
+    constructor(props) {
         super(props)
         this.state = {
-            type: "Veggies",
-            food: [],
-            location: [],
-            filteredFoods: []
+            typeFilter: 'Fruits',
+            monthFilter: 'February',
+            locationFilter: 'California'
         }
     }
     componentDidMount() {
-        this.changeFilter = this.changeFilter.bind(this)
+        this.handleFilterChange = this.handleFilterChange.bind(this)
     }
-    observe() {
+    observe(nextProps, nextState) {
         return {
-          FLM: new Parse.Query('FLM').include(['food', 'location','month'])
+          FLM: new Parse.Query('FLM').include(['food','food.type', 'location','month'])
         }
     }
-    getRelations = (targetValue, key, relation) => {
-        let FLM = this.data.FLM
-
-        let relations = FLM.filter(obj =>
-            obj[key].name == targetValue
-        ).map((obj) => {
-            return obj[relation].name
-        })
-        return getUniqueArray(relations)
-    }
-    // getSeasonalFoods() {
-    //     let FLM = this.props.data.FLM
-    //     let seasonalFoods = FLM.filter(el =>
-    //         el.type.name == this.state.type
-    //     )
-    //     console.log('hello')
-    //     this.setState({seasonalFoods : seasonalFoods})
-    // }
-    componentDidUpdate() {
-      console.log('index update')
-    }
-    changeFilter(filterState) {
-      // console.log(filterState)
+    handleFilterChange(filterState) {
+      if(!filterState) {
+        return
+      } else {
+        let newState = {
+          typeFilter: filterState.typeFilter,
+          monthFilter: filterState.monthFilter,
+          locationFilter: filterState.locationFilter
+        }
+        this.setState(newState)
+      }
     }
     render() {
-      console.log(this.data.FLM)
-        return (
-            <div>
-                {/*<NavPrimary data={this.data} changeFilter={this.changeFilter}/> */}
-                <FoodList foods={this.data.FLM}/>
-            </div>
-        )
+      let foodData = this.data.FLM
+
+      let filteredFoods = foodData.filter(el =>
+        el.location.name == this.state.locationFilter && el.month.name == this.state.monthFilter
+      )
+      console.log(filteredFoods)
+
+      return (
+          <div>
+              <NavPrimary foods={foodData} filters={this.state} handleFilterChange={this.handleFilterChange}/>
+              <FoodList ref="foodList" foods={filteredFoods}/>
+          </div>
+      )
     }
 }

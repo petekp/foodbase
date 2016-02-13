@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import FoodFilterForm from '../FoodFilterForm/FoodFilterForm'
 
 export default class NavPrimary extends Component {
-    constructor(props, context) {
+    constructor(props) {
         super(props)
     }
     render() {

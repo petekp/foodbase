@@ -1,69 +1,43 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import './FoodFilterForm.css'
 
 export default class FoodFilterForm extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-          type: '',
-          month: '',
-          location: ''
-        }
     }
     componentDidMount() {
-        this.typeChange = this.typeChange.bind(this)
-        this.locationChange = this.locationChange.bind(this)
-        this.monthChange = this.monthChange.bind(this)
+        this.onFilterChange = this.onFilterChange.bind(this)
     }
-    componentWillReceiveProps(nextProps) {
-      this.state = {}
-      let newState = {
-        type: nextProps.data.FLM[1].type.name,
-        month: nextProps.data.FLM[1].month.name,
-        location: nextProps.data.FLM[1].location.name
-      }
-      this.setState(newState)
+    onFilterChange(name, e) {
+      let filterState = this.props.filters
+      filterState[name + 'Filter'] = e.target.value
+      this.props.handleFilterChange(filterState)
     }
-    componentWillUpdate(nextProps, nextState) {
-      nextProps.changeFilter(nextState)
-    }
-    typeChange(e) {
-        this.setState({
-            type: e.target.value
-        })
-    }
-    monthChange(e) {
-        this.setState({
-            month: e.target.value
-        })
-    }
-    locationChange(e) {
-        this.setState({
-            location: e.target.value
-        })
-    }
+
     render() {
+        let foods = this.props.foods
         return (
-            <div className="FoodFilterForm">
+            <div ref="FoodFilterForm" className="FoodFilterForm">
                 Show me
-                <select onChange={this.typeChange}>
-                    {this.props.data.FLM.map(function(food) {
-                      return <option key={food.objectId}>{food.name}</option>
+                <select value={this.props.filters.typeFilter} ref="type" onChange={this.onFilterChange.bind(this, 'type')}>
+                    {foods.map(function(obj) {
+                        return <option value={obj.food.type.name} key={obj.objectId}>{obj.food.type.name}</option>
                     })}
                 </select>
                 in season
-                <select onChange={this.monthChange}>
-                    {this.props.data.FLM.map(function(food) {
-                      return <option key={food.objectId}>{food.month.name}</option>
+                <select value={this.props.filters.monthFilter} onChange={this.onFilterChange.bind(this, 'month')}>
+                    {foods.map(function(food) {
+                        return <option value={food.month.name} key={food.objectId}>{food.month.name}</option>
                     })}
                 </select>
                 within
-                <select onChange={this.locationChange}>
-                    {this.props.data.FLM.map(function(food) {
-                      return <option key={food.objectId}>{food.location.name}</option>
+                <select value={this.props.filters.locationFilter} onChange={this.onFilterChange.bind(this, 'location')}>
+                    {foods.map(function(food) {
+                        return <option value={food.location.name} key={food.objectId}>{food.location.name}</option>
                     })}
                 </select>
             </div>
         )
     }
 }
+2

@@ -6,10 +6,7 @@ export default class FoodList extends Component {
     constructor(state, props) {
         super(props)
         this.state = {
-            foodNodes: '',
-            type: '',
-            month: '',
-            location: ''
+            foodNodes: ''
         }
     }
     componentWillReceiveProps(nextProps) {
@@ -22,9 +19,6 @@ export default class FoodList extends Component {
             )
         })
         this.setState({foodNodes: foodNodes})
-    }
-    componentWillUpdate(nextProps, nextState) {
-      console.log(nextState)
     }
     render() {
         return (
