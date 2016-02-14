@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import Food from '../Food/Food'
-import sortByKey from '../Helpers/sortByKey'
 
 export default class FoodList extends Component {
-    constructor(state, props) {
+    constructor(props) {
         super(props)
         this.state = {
             foodNodes: ''
@@ -25,7 +24,6 @@ export default class FoodList extends Component {
             <div className="FoodList">
                 {this.state.foodNodes}
             </div>
-
         )
     }
 }

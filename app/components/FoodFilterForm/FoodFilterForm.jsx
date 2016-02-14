@@ -18,13 +18,13 @@ export default class FoodFilterForm extends Component {
         let foods = this.props.foods
         return (
             <div ref="FoodFilterForm" className="FoodFilterForm">
-                Show me
+                Show 
                 <select value={this.props.filters.typeFilter} ref="type" onChange={this.onFilterChange.bind(this, 'type')}>
                     {foods.map(function(obj) {
                         return <option value={obj.food.type.name} key={obj.objectId}>{obj.food.type.name}</option>
                     })}
                 </select>
-                in season
+                during
                 <select value={this.props.filters.monthFilter} onChange={this.onFilterChange.bind(this, 'month')}>
                     {foods.map(function(food) {
                         return <option value={food.month.name} key={food.objectId}>{food.month.name}</option>
