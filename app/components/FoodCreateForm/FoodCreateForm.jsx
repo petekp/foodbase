@@ -31,28 +31,41 @@ export default class FoodCreateForm extends Component {
             this.refs.newFoodInput.focus()
         }
     }
-    addNewRelation = () => {
-        let foodId = this.getObjectId('foods', this.state.food)
-        let locationId = this.getObjectId('locations', this.state.locations)
-        let monthId = this.getObjectId('months', this.state.months)
+    addNewRelations = () => {
+      let foodData = this.props.data.FLM
+      let currentState = this.state.locations
+      let currentMonth = this.state.month
+      let foods = this.state.foods
+      let filteredFoods = foodData.filter(el => el.location.name == currentState && el.month.name == currentMonth)
 
-        ParseReact.Mutation.Create('FLM', {
-            food: {
-                __type: 'Pointer',
-                className: 'Foods',
-                objectId: foodId
-            },
-            location: {
-                __type: 'Pointer',
-                className: 'Locations',
-                objectId: locationId
-            },
-            month: {
-                __type: 'Pointer',
-                className: 'Months',
-                objectId: monthId
-            }
-        }).dispatch()
+      // foods.forEach( function(food) {
+      //
+      //   filteredFoods.push()
+      // }.bind(this))
+      console.log(filteredFoods)
+
+
+      let locationId = this.getObjectId('locations', this.state.locations)
+      let monthId = this.getObjectId('months', this.state.months)
+
+
+      // ParseReact.Mutation.Create('FLM', {
+      //     food: {
+      //         __type: 'Pointer',
+      //         className: 'Foods',
+      //         objectId: foodId
+      //     },
+      //     location: {
+      //         __type: 'Pointer',
+      //         className: 'Locations',
+      //         objectId: locationId
+      //     },
+      //     month: {
+      //         __type: 'Pointer',
+      //         className: 'Months',
+      //         objectId: monthId
+      //     }
+      // }).dispatch()
     }
 
     getRelations = (targetValue, relation, ...keys) => {
@@ -63,7 +76,7 @@ export default class FoodCreateForm extends Component {
           FLM.filter(obj => obj[key].name == targetValue)
           .map(obj => { relations.push( obj[relation].name) })
         })
-        console.log(relations)
+
         return getUniqueArray(relations)
     }
     changedFood = (e) => {
@@ -75,23 +88,23 @@ export default class FoodCreateForm extends Component {
         }
     }
     changedLocation = (e) => {
-        let currentState = this.state
-        let currentMonth = this.state.month
-        this.setState({})
-        currentState.locations = e.target.value
+      let currentLocation = e.target.value
+      let currentState = this.state
+      let currentMonth = this.state.month
+      this.setState({})
 
-        let nextState = {
-            locations: currentState.locations,
-            month: currentMonth,
-            foods: []
-        }
-        this.setState(nextState)
-        console.log(nextState)
+
+      let nextState = {
+          locations: currentLocation,
+          month: currentMonth,
+          foods: []
+      }
+      this.setState(nextState)
+
     }
     changedMonth = (e) => {
         let currentState = this.state
         currentState.locations = this.state.locations
-        console.log(this.state.locations)
         this.setState({})
         currentState.month = e.target.value
 
@@ -121,7 +134,7 @@ export default class FoodCreateForm extends Component {
                         <input ref='newFoodInput' type='text' placeholder='Food'/>
                         <button onClick={this.addFood} type='button'>Add</button>
                         <button className='button--warning' onClick={this.removeFood} type='button'>Remove</button>
-                        <button className='button--right' onClick={this.addNewRelation} type='button'>⚯ Store Relationship</button>
+                        <button className='button--right' onClick={this.addNewRelations.bind(this)} type='button'>⚯ Store Relationship</button>
                     </div>
                 </section>
 
