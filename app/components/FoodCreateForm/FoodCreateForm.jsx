@@ -68,17 +68,7 @@ export default class FoodCreateForm extends Component {
       // }).dispatch()
     }
 
-    getRelations = (targetValue, relation, ...keys) => {
-        let FLM = this.props.data.FLM
-        let relations = []
 
-        keys.forEach(key => {
-          FLM.filter(obj => obj[key].name == targetValue)
-          .map(obj => { relations.push( obj[relation].name) })
-        })
-
-        return getUniqueArray(relations)
-    }
     changedFood = (e) => {
         let foods = this.state.foods
         if (foods.includes(e.target.value)) {
@@ -91,32 +81,43 @@ export default class FoodCreateForm extends Component {
       let currentLocation = e.target.value
       let currentState = this.state
       let currentMonth = this.state.month
-      this.setState({})
-
-
       let nextState = {
           locations: currentLocation,
           month: currentMonth,
           foods: []
       }
+      this.setState({})
       this.setState(nextState)
+    }
+    getSeasonalFoods = (month, locations) => {
+        let foodData = this.props.data.FLM
+        let seasonalFoods = []
 
+        let seasonalFoodObjects = foodData.filter(
+          obj => obj.location.name == locations && obj.month.name == month)
+
+        seasonalFoodObjects.forEach(obj => {
+          seasonalFoods.push( obj.food.name )
+        })
+
+        console.log(seasonalFoods)
+
+        return getUniqueArray(seasonalFoods)
     }
     changedMonth = (e) => {
         let currentState = this.state
         currentState.locations = this.state.locations
-        this.setState({})
         currentState.month = e.target.value
 
-        let relatedFoods = this.getRelations(e.target.value, 'food', 'month', 'location')
+        let relatedFoods = this.getSeasonalFoods(e.target.value, this.state.locations)
 
         let nextState = {
             locations: currentState.locations,
             month: currentState.month,
             foods: relatedFoods
         }
+        this.setState({})
         this.setState(nextState)
-        console.log(nextState)
     }
     render() {
         var foods = this.state.foods,
