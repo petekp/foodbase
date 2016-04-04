@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import ParseReact from 'parse-react'
 import getUniqueArray from '../Helpers/getUniqueArray'
+import getObjectId from '../Helpers/getObjectId'
+
 import './FoodCreateForm.css'
 
 export default class FoodCreateForm extends Component {
@@ -8,19 +10,14 @@ export default class FoodCreateForm extends Component {
         super(props)
 
         this.state = {
-            locations: '',
+            location: '',
             month: '',
             foods: []
         }
     }
-    getObjectId = (table, key) => {
-        return this.props.data[table].filter(obj => obj.name == key).map((obj) => {
-            return obj.objectId
-        }).toString()
-    }
     addFood = () => {
         let newFoodInputValue = this.refs.newFoodInput.value
-        let foodId = this.getObjectId('foods', newFoodInputValue)
+        let foodId = getObjectId('foods', newFoodInputValue)
 
         if (!newFoodInputValue.length > 0) {
             alert('nothing entered')
@@ -32,87 +29,110 @@ export default class FoodCreateForm extends Component {
         }
     }
     addNewRelations = () => {
-      let foodData = this.props.data.FLM
-      let currentState = this.state.locations
-      let currentMonth = this.state.month
-      let foods = this.state.foods
-      let filteredFoods = foodData.filter(el => el.location.name == currentState && el.month.name == currentMonth)
+        let foodData = this.props.data.FLM,
+            currentLocation = this.state.location,
+            currentMonth = this.state.month,
+            foods = this.state.foods,
+            newRelations = [],
+            existingFoods = [],
+            newFoods = []
 
-      // foods.forEach( function(food) {
-      //
-      //   filteredFoods.push()
-      // }.bind(this))
-      console.log(filteredFoods)
+        foodData.forEach(obj => {
+            if (obj.location.name == currentLocation && obj.month.name == currentMonth) {
+                existingFoods.push(obj.food.name)
+            }
+        })
+
+        foods.forEach(food => {
+          if (existingFoods.includes(food)) {
+            return
+          } else {
+            newFoods.push(food)
+          }
+        })
+
+        newFoods.forEach(food => {
+          let foodId = getObjectId(this.props.data.foods,food),
+              locationId = getObjectId(this.props.data.locations,currentLocation),
+              monthId = getObjectId(this.props.data.months,currentMonth)
+
+          ParseReact.Mutation.Create('FLM', {
+              food: {
+                  __type: 'Pointer',
+                  className: 'Foods',
+                  objectId: foodId
+              },
+              location: {
+                  __type: 'Pointer',
+                  className: 'Locations',
+                  objectId: locationId
+              },
+              month: {
+                  __type: 'Pointer',
+                  className: 'Months',
+                  objectId: monthId
+              }
+          }).dispatch()
+        })
 
 
-      let locationId = this.getObjectId('locations', this.state.locations)
-      let monthId = this.getObjectId('months', this.state.months)
 
 
-      // ParseReact.Mutation.Create('FLM', {
-      //     food: {
-      //         __type: 'Pointer',
-      //         className: 'Foods',
-      //         objectId: foodId
-      //     },
-      //     location: {
-      //         __type: 'Pointer',
-      //         className: 'Locations',
-      //         objectId: locationId
-      //     },
-      //     month: {
-      //         __type: 'Pointer',
-      //         className: 'Months',
-      //         objectId: monthId
-      //     }
-      // }).dispatch()
     }
-
 
     changedFood = (e) => {
-        let foods = this.state.foods
-        if (foods.includes(e.target.value)) {
-            foods.splice(foods.indexOf(e.target.value), 1)
+        let currentFoods = this.state.foods
+        let selectedFood = e.target.value
+        let state = this.state
+        let currentLocation = state.location
+        let currentMonth = state.month
+
+        if (currentFoods.includes(selectedFood)) {
+            currentFoods.splice(currentFoods.indexOf(e.target.value), 1)
         } else {
-            foods.push(e.target.value)
+            currentFoods.push(e.target.value)
         }
+        let nextState = {
+            location: currentLocation,
+            month: currentMonth,
+            foods: currentFoods
+        }
+        this.setState({})
+        this.setState(nextState)
     }
     changedLocation = (e) => {
-      let currentLocation = e.target.value
-      let currentState = this.state
-      let currentMonth = this.state.month
-      let nextState = {
-          locations: currentLocation,
-          month: currentMonth,
-          foods: []
-      }
-      this.setState({})
-      this.setState(nextState)
+        let currentLocation = e.target.value
+        let currentState = this.state
+        let currentMonth = this.state.month
+        let nextState = {
+            location: currentLocation,
+            month: currentMonth,
+            foods: []
+        }
+        this.setState({})
+        this.setState(nextState)
     }
-    getSeasonalFoods = (month, locations) => {
+    getSeasonalFoods = (month, location) => {
         let foodData = this.props.data.FLM
         let seasonalFoods = []
 
-        let seasonalFoodObjects = foodData.filter(
-          obj => obj.location.name == locations && obj.month.name == month)
+        let seasonalFoodObjects = foodData.filter(obj => obj.location.name == location && obj.month.name == month)
 
         seasonalFoodObjects.forEach(obj => {
-          seasonalFoods.push( obj.food.name )
+            seasonalFoods.push(obj.food.name)
         })
-
-        console.log(seasonalFoods)
 
         return getUniqueArray(seasonalFoods)
     }
     changedMonth = (e) => {
         let currentState = this.state
-        currentState.locations = this.state.locations
+        currentState.location = this.state.location
         currentState.month = e.target.value
 
-        let relatedFoods = this.getSeasonalFoods(e.target.value, this.state.locations)
+        let relatedFoods = this.getSeasonalFoods(e.target.value, this.state.location)
 
         let nextState = {
-            locations: currentState.locations,
+            location: currentState.location,
             month: currentState.month,
             foods: relatedFoods
         }
@@ -120,8 +140,9 @@ export default class FoodCreateForm extends Component {
         this.setState(nextState)
     }
     render() {
+
         var foods = this.state.foods,
-            location = this.state.locations,
+            location = this.state.location,
             month = this.state.month,
             data = this.props.data,
             foodAmt = data.foods.length,
@@ -130,24 +151,19 @@ export default class FoodCreateForm extends Component {
 
         return (
             <div className='FoodCreateForm'>
-                <section>
+                <div className="Nav">
                     <div className='actions'>
                         <input ref='newFoodInput' type='text' placeholder='Food'/>
                         <button onClick={this.addFood} type='button'>Add</button>
                         <button className='button--warning' onClick={this.removeFood} type='button'>Remove</button>
                         <button className='button--right' onClick={this.addNewRelations.bind(this)} type='button'>⚯ Store Relationship</button>
                     </div>
-                </section>
 
-                <section>
                     <div className='selections'>
-                        ↳ [
-                        {this.state.location},
-                        {this.state.months},
-                        {this.state.foods}
+                        ↳ [ {this.state.location}, {this.state.months}, {this.state.foods}
                         ]
                     </div>
-                </section>
+                </div>
 
                 <section>
                     <div className='locations column'>
