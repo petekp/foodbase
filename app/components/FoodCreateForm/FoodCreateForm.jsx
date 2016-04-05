@@ -106,6 +106,7 @@ export default class FoodCreateForm extends Component {
     }
 
     changedFood = (e) => {
+        e.preventDefault()
         let currentFoods = this.state.foods
         let selectedFood = e.target.value
         let state = this.state
@@ -126,6 +127,7 @@ export default class FoodCreateForm extends Component {
         this.setState(nextState)
     }
     changedLocation = (e) => {
+        e.preventDefault()
         let currentLocation = e.target.value
         let currentState = this.state
         let currentMonth = this.state.month
@@ -141,7 +143,9 @@ export default class FoodCreateForm extends Component {
         let foodData = this.props.data.FLM
         let seasonalFoods = []
 
-        let seasonalFoodObjects = foodData.filter(obj => obj.location.name == location && obj.month.name == month)
+        let seasonalFoodObjects = foodData.filter(obj =>
+          obj.location.name == location && obj.month.name == month
+        )
 
         seasonalFoodObjects.forEach(obj => {
             seasonalFoods.push(obj.food.name)
@@ -150,6 +154,7 @@ export default class FoodCreateForm extends Component {
         return getUniqueArray(seasonalFoods)
     }
     changedMonth = (e) => {
+        e.preventDefault()
         let currentState = this.state
         currentState.location = this.state.location
         currentState.month = e.target.value
@@ -179,18 +184,13 @@ export default class FoodCreateForm extends Component {
                 <div className="Nav">
                     <div className='actions'>
                         <input ref='newFoodInput' type='text' placeholder='Food'/>
-                        <button onClick={this.addFood} type='button'>Add</button>
-                        <button className='button--warning' onClick={this.removeFood} type='button'>Remove</button>
-                        <button className='button--right' onClick={this.addNewRelations.bind(this)} type='button'>⚯ Store Relationship</button>
-                    </div>
-
-                    <div className='selections'>
-                        ↳ [ {this.state.location}, {this.state.months}, {this.state.foods}
-                        ]
+                        <button onClick={this.addFood} type='button'>👇 Add</button>
+                        <button className='button--warning' onClick={this.removeFood} type='button'>❌ Remove</button>
+                        <button className='button--right' onClick={this.addNewRelations.bind(this)} type='button'>⚡️ Update Foods</button>
                     </div>
                 </div>
 
-                <section>
+                <section className="main">
                     <div className='locations column'>
                         <h2>Locations ({locationAmt})</h2>
                         <select onChange={this.changedLocation} size={this.props.data.locations.length + 1}>
