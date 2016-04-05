@@ -32,26 +32,46 @@ export default class FoodCreateForm extends Component {
         let foodData = this.props.data.FLM,
             currentLocation = this.state.location,
             currentMonth = this.state.month,
-            foods = this.state.foods,
-            newRelations = [],
+            selectedFoods = this.state.foods,
             existingFoods = [],
-            newFoods = []
+            removedFoods = [],
+            removedFoodObjectIds = [],
+            addedFoods = []
 
+        // Store existing foods for this month & location
         foodData.forEach(obj => {
             if (obj.location.name == currentLocation && obj.month.name == currentMonth) {
                 existingFoods.push(obj.food.name)
             }
         })
 
-        foods.forEach(food => {
-          if (existingFoods.includes(food)) {
+        // Store un-selected foods for removal
+        existingFoods.forEach(foodName => {
+          if (selectedFoods.includes(foodName)) {
             return
           } else {
-            newFoods.push(food)
+            removedFoods.push(foodName)
           }
         })
 
-        newFoods.forEach(food => {
+        foodData.forEach(obj => {
+          if (removedFoods.includes(obj.food.name)) {
+            removedFoodObjectIds.push(obj.objectId)
+          }
+        })
+
+
+        // Store newly selected foods for addition
+        selectedFoods.forEach(food => {
+          if (existingFoods.includes(food)) {
+            return
+          } else {
+            addedFoods.push(food)
+          }
+        })
+
+        // Create new relationships
+        addedFoods.forEach(food => {
           let foodId = getObjectId(this.props.data.foods,food),
               locationId = getObjectId(this.props.data.locations,currentLocation),
               monthId = getObjectId(this.props.data.months,currentMonth)
@@ -75,9 +95,14 @@ export default class FoodCreateForm extends Component {
           }).dispatch()
         })
 
-
-
-
+        // Create new relationships
+        removedFoodObjectIds.forEach(objId => {
+          let target = {
+            className: 'FLM',
+            objectId: objId
+          }
+          ParseReact.Mutation.Destroy(target).dispatch()
+        })
     }
 
     changedFood = (e) => {
