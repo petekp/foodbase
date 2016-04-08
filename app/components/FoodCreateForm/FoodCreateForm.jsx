@@ -10,6 +10,7 @@ export default class FoodCreateForm extends Component {
         super(props)
 
         this.state = {
+            type: 'Fruits',
             location: '',
             month: '',
             foods: []
@@ -17,12 +18,22 @@ export default class FoodCreateForm extends Component {
     }
     addFood = () => {
         let newFoodInputValue = this.refs.newFoodInput.value
-        let foodId = getObjectId('foods', newFoodInputValue)
+        let typeId = getObjectId(this.props.data.types, this.state.type)
+        console.log(typeId)
+
+        // note: need to check if food already exists
 
         if (!newFoodInputValue.length > 0) {
             alert('nothing entered')
         } else {
-            ParseReact.Mutation.Create('Foods', {name: this.refs.newFoodInput.value}).dispatch();
+            ParseReact.Mutation.Create('Foods', {
+              name: this.refs.newFoodInput.value,
+              type: {
+                  __type: 'Pointer',
+                  className: 'Types',
+                  objectId: typeId
+              }
+            }).dispatch();
 
             this.refs.newFoodInput.value = ''
             this.refs.newFoodInput.focus()
@@ -59,7 +70,6 @@ export default class FoodCreateForm extends Component {
             removedFoodObjectIds.push(obj.objectId)
           }
         })
-
 
         // Store newly selected foods for addition
         selectedFoods.forEach(food => {
@@ -109,18 +119,16 @@ export default class FoodCreateForm extends Component {
         e.preventDefault()
         let currentFoods = this.state.foods
         let selectedFood = e.target.value
-        let state = this.state
-        let currentLocation = state.location
-        let currentMonth = state.month
 
         if (currentFoods.includes(selectedFood)) {
-            currentFoods.splice(currentFoods.indexOf(e.target.value), 1)
+            currentFoods.splice(currentFoods.indexOf(selectedFood), 1)
         } else {
-            currentFoods.push(e.target.value)
+            currentFoods.push(selectedFood)
         }
         let nextState = {
-            location: currentLocation,
-            month: currentMonth,
+            type: this.state.type,
+            location: this.state.location,
+            month: this.state.month,
             foods: currentFoods
         }
         this.setState({})
@@ -128,13 +136,24 @@ export default class FoodCreateForm extends Component {
     }
     changedLocation = (e) => {
         e.preventDefault()
-        let currentLocation = e.target.value
-        let currentState = this.state
-        let currentMonth = this.state.month
+
         let nextState = {
-            location: currentLocation,
-            month: currentMonth,
+            type: this.state.type,
+            location: e.target.value,
+            month: this.state.month,
             foods: []
+        }
+        this.setState({})
+        this.setState(nextState)
+    }
+    changedType = (e) => {
+        e.preventDefault()
+
+        let nextState = {
+            type: e.target.value,
+            location: this.state.location,
+            month: this.state.month,
+            foods: this.state.foods
         }
         this.setState({})
         this.setState(nextState)
@@ -155,15 +174,12 @@ export default class FoodCreateForm extends Component {
     }
     changedMonth = (e) => {
         e.preventDefault()
-        let currentState = this.state
-        currentState.location = this.state.location
-        currentState.month = e.target.value
 
         let relatedFoods = this.getSeasonalFoods(e.target.value, this.state.location)
 
         let nextState = {
-            location: currentState.location,
-            month: currentState.month,
+            location: this.state.location,
+            month: e.target.value,
             foods: relatedFoods
         }
         this.setState({})
@@ -183,9 +199,14 @@ export default class FoodCreateForm extends Component {
             <div className='FoodCreateForm'>
                 <div className="Nav">
                     <div className='actions'>
+                        <select name="type" size="3" id="type" onChange={this.changedType}>
+                          {this.props.data.types.map(function(type) {
+                              return <option key={type.objectId}>{type.name}</option>
+                          })}
+                        </select>
                         <input ref='newFoodInput' type='text' placeholder='Food'/>
                         <button onClick={this.addFood} type='button'>👇 Add</button>
-                        <button className='button--warning' onClick={this.removeFood} type='button'>❌ Remove</button>
+                        <button className='button--warning' onClick={this.removeFood} type='button'>❌</button>
                         <button className='button--right' onClick={this.addNewRelations.bind(this)} type='button'>⚡️ Update Foods</button>
                     </div>
                 </div>
