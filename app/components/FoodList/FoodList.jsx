@@ -13,7 +13,7 @@ export default class FoodList extends Component {
         let foodNodes = nextProps.data.FLM.map((obj, i) => {
           let food = obj.food
             return (
-                <Food id={food.id} key={i} name={food.name} type={food.type} hue={food.hue}>
+                <Food id={food.id} key={i} name={food.name} type={food.type} color={food.color}>
                     {food.text}
                 </Food>
             )

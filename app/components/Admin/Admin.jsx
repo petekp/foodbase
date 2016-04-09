@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, {
+    Component
+} from 'react'
 import Parse from 'parse'
 import ParseReact from 'parse-react'
 var ParseComponent = ParseReact.Component(React)
@@ -9,7 +11,7 @@ import FoodCreateForm from '../FoodCreateForm/FoodCreateForm'
 export default class Admin extends ParseComponent {
     mixins: [ParseReact.Mixin]
 
-    constructor(props) {
+        constructor(props) {
         super(props)
     }
     observe() {
@@ -21,11 +23,18 @@ export default class Admin extends ParseComponent {
             FLM: new Parse.Query('FLM')
         }
     }
+    parseQueryPromise(queryName, query) {
+        return new Promise((resolve, reject) => {
+            resolve(query)
+            reject(Error("Network Error"))
+        })
+    }
     render() {
-        return (
-          <div>
-            <FoodCreateForm data={this.data} />
-          </div>
+        return ( < div >
+            < FoodCreateForm data = {
+                this.data
+            }
+            /> < /div >
         )
-      }
+    }
 }

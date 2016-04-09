@@ -13,8 +13,8 @@ export default class Index extends ParseComponent {
         super(props)
         this.state = {
             typeFilter: 'Fruits',
-            monthFilter: 'May',
-            locationFilter: 'Arkansas'
+            monthFilter: 'January',
+            locationFilter: 'California'
         }
     }
     observe(nextProps, nextState) {
