@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import getUniqueArray from '../Helpers/getUniqueArray'
 import './FoodFilterForm.css'
 
 export default class FoodFilterForm extends Component {
@@ -15,27 +16,38 @@ export default class FoodFilterForm extends Component {
     }
 
     render() {
-        let foods = this.props.foods
+        let FLM = this.props.foods
+        let locationInstances = []
+        let monthInstances = []
+
+        FLM.map(food => {
+          locationInstances.push(food.location.name)
+          monthInstances.push(food.month.name)
+        })
+        let locations = getUniqueArray(locationInstances)
+        let months = getUniqueArray(monthInstances)
+        console.log(locations, months)
         return (
             <div ref="FoodFilterForm" className="FoodFilterForm">
-                Show
+                Show seasonal
                 <select value={this.props.filters.typeFilter} ref="type" onChange={this.onFilterChange.bind(this, 'type')}>
-                    {foods.map(function(obj) {
+                    {FLM.map(obj => {
                         return <option value={obj.food.type.name} key={obj.objectId}>{obj.food.type.name}</option>
                     })}
                 </select>
-                during
-                <select value={this.props.filters.monthFilter} onChange={this.onFilterChange.bind(this, 'month')}>
-                    {foods.map(function(food) {
-                        return <option value={food.month.name} key={food.objectId}>{food.month.name}</option>
-                    })}
-                </select>
-                within
+                in
                 <select value={this.props.filters.locationFilter} onChange={this.onFilterChange.bind(this, 'location')}>
-                    {foods.map(function(food) {
-                        return <option value={food.location.name} key={food.objectId}>{food.location.name}</option>
+                    {locations.map(location => {
+                        return <option value={location} key={location.id}>{location}</option>
                     })}
                 </select>
+                around
+                <select value={this.props.filters.monthFilter} onChange={this.onFilterChange.bind(this, 'month')}>
+                    {months.map(month => {
+                        return <option value={month} key={month.id}>{month}</option>
+                    })}
+                </select>
+
             </div>
         )
     }

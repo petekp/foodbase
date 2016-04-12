@@ -204,10 +204,10 @@ export default class FoodCreateForm extends Component {
                 return <option key={type.objectId}>{type.name}</option>
               })}
             </select>
-            <input ref='newFoodInput' type='text' placeholder='Food'/>
+            <input ref='newFoodInput' type='text' placeholder='New food name'/>
             <button onClick={this.addFood} type='button'>👇 Add</button>
             <button className='button--warning' onClick={this.removeFood} type='button'>❌</button>
-            <button className='button--right' onClick={this.addNewRelations.bind(this)} type='button'>⚡️ Update Foods</button>
+            <button className='button--right' onClick={this.addNewRelations.bind(this)} type='button'>⚡️ Sync with Parse</button>
           </div>
         </div>
 
