@@ -1,3 +1,3 @@
-export default function getUniquesArray(array) {
+export default (array) => {
     return [...new Set(array)]
 }

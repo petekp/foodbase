@@ -6,23 +6,14 @@
   "scripts": {
     "start": "webpack-dev-server --inline --hot"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/petekp/petekp-v4.git"
-  },
   "author": "Pete Petrash",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/petekp/petekp-v4/issues"
-  },
-  "homepage": "https://github.com/petekp/petekp-v4#readme",
   "devDependencies": {
     "autoprefixer": "^6.0.3",
     "babel-core": "^6.3.26",
     "babel-loader": "^6.2.0",
     "babel-plugin-react-transform": "^2.0.0",
     "css-loader": "^0.23.1",
-    "history": "^1.13.1",
     "html-webpack-plugin": "^1.6.2",
     "lost": "^6.6.2",
     "normalize.css": "^3.0.3",

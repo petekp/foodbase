@@ -50,7 +50,7 @@ var common = {
     },
     plugins: [
         new HtmlwebpackPlugin({
-            title: 'Pete Petrash'
+            title: 'Foodbase'
         }),
         new OpenBrowserPlugin({ url: 'http://localhost:8080' })
     ]
