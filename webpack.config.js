@@ -8,7 +8,6 @@ var HtmlwebpackPlugin = require('html-webpack-plugin'),
 var postcssImport       = require('postcss-import'),
     postcssPrecss       = require('precss'),
     postcssAutoprefixer = require('autoprefixer'),
-    postcssNested       = require('postcss-nested'),
     postcssLost         = require('lost'),
     postcssRucksack     = require('rucksack-css');
 
@@ -43,7 +42,6 @@ var common = {
             }),
             postcssPrecss(),
             postcssAutoprefixer(),
-            postcssNested(),
             postcssRucksack(),
             postcssLost()
         ];
@@ -62,6 +60,7 @@ if (TARGET === 'start' || !TARGET) {
         module: {
             loaders: [{
                 test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
                 loaders: ['babel'],
                 include: path.resolve(ROOT_PATH, 'app')
             }]
