@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM, { render } from 'react-dom'
-import { browserHistory, IndexRoute, Router, Route, Link } from 'react-router'
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 import App from './components/App'
 import Index from './components/Index/Index'
