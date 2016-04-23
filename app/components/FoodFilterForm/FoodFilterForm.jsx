@@ -17,22 +17,26 @@ export default class FoodFilterForm extends Component {
 
     render() {
         let FLM = this.props.foods
+        let typeInstances = []
         let locationInstances = []
         let monthInstances = []
+        console.log(FLM)
 
         FLM.map(food => {
+          typeInstances.push(food.food.type.name)
           locationInstances.push(food.location.name)
           monthInstances.push(food.month.name)
         })
+        let types = getUniqueArray(typeInstances)
         let locations = getUniqueArray(locationInstances)
         let months = getUniqueArray(monthInstances)
-        console.log(locations, months)
+
         return (
             <div ref="FoodFilterForm" className="FoodFilterForm">
-                Show seasonal
+                Seasonal
                 <select value={this.props.filters.typeFilter} ref="type" onChange={this.onFilterChange.bind(this, 'type')}>
-                    {FLM.map(obj => {
-                        return <option value={obj.food.type.name} key={obj.objectId}>{obj.food.type.name}</option>
+                    {types.map(type => {
+                        return <option value={type} key={type.id}>{type}</option>
                     })}
                 </select>
                 in
@@ -41,7 +45,7 @@ export default class FoodFilterForm extends Component {
                         return <option value={location} key={location.id}>{location}</option>
                     })}
                 </select>
-                around
+                in
                 <select value={this.props.filters.monthFilter} onChange={this.onFilterChange.bind(this, 'month')}>
                     {months.map(month => {
                         return <option value={month} key={month.id}>{month}</option>
