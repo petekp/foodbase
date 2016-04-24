@@ -7,7 +7,7 @@ var ParseComponent = ParseReact.Component(React)
 
 Parse.initialize('agvA5VJCcRs9KrikUD0bcrS4D2WaqiKaO35ZlDhq', 'chYL0LjbqMKCwe4lPeayTt7gTyAP4iXnS7rpND8x')
 
-export default class Index extends ParseComponent {
+export default class Home extends ParseComponent {
     mixins : [ParseReact.Mixin]
     constructor(props) {
         super(props)
