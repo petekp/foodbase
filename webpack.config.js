@@ -36,7 +36,11 @@ const common = {
   			test: /\.jsx?$/,
   			loaders: ['babel?cacheDirectory'],
   			include: path.resolve(ROOT_PATH, 'app')
-  		}
+  		},
+			{
+			  test: /\.(png|jpg|gif)$/,
+			  loader: "url-loader?limit=5000&name=images/img-[hash:6].[ext]"
+			}
     ]
 	},
 	resolve: {

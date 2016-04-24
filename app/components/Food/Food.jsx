@@ -46,7 +46,9 @@ export default class Food extends Component {
         this.zoom()
     }
     render() {
-        var bgImageURL = `url(app/images/foods/` + this.props.name.toLowerCase() + `@2x.jpg)`;
+        var foodImage = require(`../../images/foods/` + this.props.name.toLowerCase().replace(/\s+/g, '') + `@2x.jpg`);
+
+        var bgImageURL = `url(${foodImage})`;
 
         return (
             <div className="Food" onClick={(e) => this.handleClick(e)} data-type={this.props.type.nameSingular} style={{backgroundColor: this.props.color}}>
