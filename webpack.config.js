@@ -87,6 +87,14 @@ if(TARGET === 'start' || !TARGET) {
 
 if(TARGET === 'build') {
   module.exports = merge(common, {
-
+		plugins: [
+      new webpack.optimize.UglifyJsPlugin({minimize: true}),
+			new webpack.DefinePlugin({
+		    'process.env': {
+		      // This has effect on the react lib size
+		      'NODE_ENV': JSON.stringify('production'),
+		    },
+		  })
+    ]
 	});
 }
