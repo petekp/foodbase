@@ -31,6 +31,7 @@ export default class Index extends ParseComponent {
                 monthFilter: filterState.monthFilter,
                 locationFilter: filterState.locationFilter
             }
+            this.setState({})
             this.setState(newState)
         }
     }

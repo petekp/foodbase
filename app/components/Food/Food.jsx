@@ -49,7 +49,7 @@ export default class Food extends Component {
         var bgImageURL = `url(app/images/foods/` + this.props.name.toLowerCase() + `@2x.jpg)`;
 
         return (
-            <div className="Food" onClick={(e) => this.handleClick(e)} data-type={this.props.type} style={{backgroundColor: this.props.color}}>
+            <div className="Food" onClick={(e) => this.handleClick(e)} data-type={this.props.type.nameSingular} style={{backgroundColor: this.props.color}}>
                 <div className="foodPhoto" style={{
                     backgroundImage: bgImageURL
                 }}></div>

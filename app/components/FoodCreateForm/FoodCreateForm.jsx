@@ -131,7 +131,6 @@ export default class FoodCreateForm extends Component {
       month: this.state.month,
       foods: currentFoods
     }
-    this.setState({})
     this.setState(nextState)
   }
   changedLocation = (e) => {
@@ -143,7 +142,6 @@ export default class FoodCreateForm extends Component {
       month: this.state.month,
       foods: []
     }
-    this.setState({})
     this.setState(nextState)
   }
   changedType = (e) => {
@@ -182,7 +180,6 @@ export default class FoodCreateForm extends Component {
       month: e.target.value,
       foods: relatedFoods
     }
-    this.setState({})
     this.setState(nextState)
   }
   render() {

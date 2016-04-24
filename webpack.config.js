@@ -1,26 +1,30 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin'),
-	merge = require('webpack-merge'),
-	path = require('path'),
-	webpack = require('webpack'),
-	OpenBrowserPlugin = require('open-browser-webpack-plugin');
+		merge             = require('webpack-merge'),
+		path              = require('path'),
+		webpack           = require('webpack'),
+		OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 /* PostCSS Plugins */
-var postcssImport = require('postcss-import'),
-	postcssPrecss = require('precss'),
-	postcssAutoprefixer = require('autoprefixer'),
-	postcssNested = require('postcss-nested'),
-	postcssLost = require('lost'),
-	postcssRucksack = require('rucksack-css');
+var postcssImport       = require('postcss-import'),
+		postcssPrecss       = require('precss'),
+		postcssAutoprefixer = require('autoprefixer'),
+		postcssNested       = require('postcss-nested'),
+		postcssLost         = require('lost'),
+		postcssRucksack     = require('rucksack-css');
 
-var TARGET = process.env.npm_lifecycle_event;
-var ROOT_PATH = path.resolve(__dirname);
+const TARGET = process.env.npm_lifecycle_event;
+const ROOT_PATH = path.resolve(__dirname);
+const PATHS = {
+  app: path.join(__dirname, 'app/main'),
+  build: path.join(__dirname, 'build')
+};
 
-module.exports = {
-	entry: path.resolve(ROOT_PATH, 'app/main'),
-	output: {
-		path: path.resolve(ROOT_PATH, 'build'),
-		filename: '/bundle.js'
-	},
+const common = {
+	entry: PATHS.app,
+  output: {
+    path: PATHS.build,
+    filename: 'bundle.js'
+  },
 	module: {
 		loaders: [
       {
@@ -30,7 +34,7 @@ module.exports = {
 		  },
       {
   			test: /\.jsx?$/,
-  			loaders: ['babel'],
+  			loaders: ['babel?cacheDirectory'],
   			include: path.resolve(ROOT_PATH, 'app')
   		}
     ]
@@ -59,10 +63,30 @@ module.exports = {
 		new OpenBrowserPlugin({
 			url: 'http://localhost:8080'
 		})
-	],
-	devServer: {
-		historyApiFallback: true,
-		inline: true,
-		progress: true
-	}
-};
+	]
+}
+
+if(TARGET === 'start' || !TARGET) {
+	module.exports = merge(common, {
+		devtool: 'eval-source-map',
+    devServer: {
+      contentBase: PATHS.build,
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      progress: true,
+      stats: 'errors-only',
+      host: process.env.HOST,
+      port: process.env.PORT
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin()
+    ]
+  })
+}
+
+if(TARGET === 'build') {
+  module.exports = merge(common, {
+
+	});
+}
