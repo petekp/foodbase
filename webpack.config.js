@@ -25,6 +25,9 @@ const common = {
     path: PATHS.build,
     filename: 'bundle.js'
   },
+	resolve: {
+		extensions: ['', '.js', '.jsx', '.json', '.jpg', '.png']
+	},
 	module: {
 		loaders: [
       {
@@ -43,9 +46,6 @@ const common = {
 			}
     ]
 	},
-	resolve: {
-		extensions: ['', '.js', '.jsx', '.json']
-	},
 	postcss: function() {
 		return [
 			postcssImport({
@@ -63,9 +63,6 @@ const common = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: 'Foodbase'
-		}),
-		new OpenBrowserPlugin({
-			url: 'http://localhost:8080'
 		})
 	]
 }
@@ -84,7 +81,10 @@ if(TARGET === 'start' || !TARGET) {
       port: process.env.PORT
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+			new OpenBrowserPlugin({
+				url: 'http://localhost:8080'
+			})
     ]
   })
 }
@@ -92,13 +92,18 @@ if(TARGET === 'start' || !TARGET) {
 if(TARGET === 'build') {
   module.exports = merge(common, {
 		plugins: [
-      new webpack.optimize.UglifyJsPlugin({minimize: true}),
-			new webpack.DefinePlugin({
-		    'process.env': {
-		      // This has effect on the react lib size
-		      'NODE_ENV': JSON.stringify('production'),
-		    },
-		  })
+			new webpack.optimize.DedupePlugin(),
+	    new webpack.optimize.UglifyJsPlugin({
+	      minimize: true,
+	      compress: {
+        	warnings: false
+      	}
+	    }),
+	    new webpack.DefinePlugin({
+	      'process.env': {
+	        'NODE_ENV': JSON.stringify('production')
+	      }
+	    })
     ]
 	});
 }

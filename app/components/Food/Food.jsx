@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import ReactDOM, {render} from 'react-dom'
-import $ from 'jQuery'
+import $ from 'jquery'
 import './Food.css'
 
 export default class Food extends Component {
