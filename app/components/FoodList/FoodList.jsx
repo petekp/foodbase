@@ -21,9 +21,15 @@ export default class FoodList extends Component {
         this.setState({foodNodes: foodNodes})
     }
     render() {
+        var content;
+        if (this.state.foodNodes != null) {
+          content = this.state.foodNodes
+        } else {
+          content = "No foods, sorry!"
+        }
         return (
             <div className="FoodList">
-                {this.state.foodNodes}
+                what
             </div>
 
         )

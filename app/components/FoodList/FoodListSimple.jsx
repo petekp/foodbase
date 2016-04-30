@@ -20,10 +20,17 @@ export default class FoodList extends Component {
         this.setState({foodNodes: foodNodes})
     }
     render() {
-        return (
-            <div className="FoodList">
-                {this.state.foodNodes}
-            </div>
-        )
+      var content;
+      if (this.state.foodNodes.length) {
+        content = this.state.foodNodes
+      } else {
+        content = <div className="error no-foods">No foods on file for this month. <br />Are we missing something? <br />Let us know 👍</div>
+      }
+      return (
+          <div className="FoodList">
+              {content}
+          </div>
+
+      )
     }
 }
